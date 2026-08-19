@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this unofficial HIRO2026 publication profile, please cite this repository and AtelierTeX."
+title: "atelier-profile-hiro"
+type: software
+authors:
+  - name: "54wsdf"
+version: "1.2.0"
+date-released: "2026-08-20"
+repository-code: "https://github.com/54wsdf/atelier-profile-hiro"
+url: "https://github.com/54wsdf/atelier-profile-hiro"
+license: "LPPL-1.3c"
+keywords:
+  - "LaTeX"
+  - "HIRO2026"
+  - "Shinosawa Hiro"
+  - "AtelierTeX"
+  - "ACGN"
+  - "cross-media studies"
+  - "GB/T 7714"
+  - "ATX-ACGN-REF"
+  - "multilingual typesetting"
+abstract: >-
+  atelier-profile-hiro is an independently maintained, unofficial third-party
+  LaTeX publication profile for writing about HIRO2026 and Shinosawa Hiro. It
+  provides three parallel title layouts, editorial and essay reading profiles,
+  narrative blocks and cross-media bibliography rendering on top of AtelierTeX.
+  The project is not affiliated with or operated by the event organizers.

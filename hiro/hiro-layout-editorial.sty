@@ -1,0 +1,35 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hiro/hiro-layout-editorial}[2026/08/20 v1.2.0 switchable HIRO front matter]
+% 防退化说明：HIRO 只把 publication identity 映射到 AtelierTeX 公共槽位；
+% feature、symposium 及未来平行排版的结构都必须留在 AtelierTeX 注册表中。
+\newcommand{\HIROConfigureAtelierTitle}{%
+  \AtelierSetMasthead{\HIROMastheadImage}%
+  \AtelierSetMastheadWidth{0.92\textwidth}%
+  \AtelierSetSymposiumMastheadWidth{\HIROMastheadImageWidth}%
+  \renewcommand{\AtelierKicker}{\hirokicker}%
+  \renewcommand{\AtelierSubtitle}{\hirosubtitle}%
+  \AtelierSetEnglishTitle{\hiroenglishtitle}%
+  \AtelierSetAffiliation{\hiroaffiliation}%
+  \AtelierSetContact{\hirocontact}%
+  \publicationdate{\HIRODate}%
+  \AtelierSetDocumentMeta{\hiropapertype\enspace/\enspace\hiroid}%
+  \renewcommand{\AtelierVersion}{}%
+  \AtelierSetAuthorNote{\hiroauthornote}%
+  \AtelierSetPublicationName{\HIROConferenceName}%
+  \AtelierSetPublicationTheme{\HIROTheme}%
+  \AtelierSetOrganizer{\HIROOrganizer}%
+}
+\newcommand{\HIROMakeTitle}{\begingroup\HIROConfigureAtelierTitle\AtelierRenderTitleLayout{\AtelierTitleLayoutName}\endgroup}
+\newcommand{\HIROMasthead}{\begingroup\HIROConfigureAtelierTitle\AtelierRenderSymposiumMasthead\endgroup}
+\newcommand{\HIROTitleLayoutName}{\AtelierTitleLayoutName}
+\newcommand{\HIROUseTitleLayout}[1]{\AtelierUseTitleLayout{#1}\renewcommand{\maketitle}{\HIROMakeTitle}}
+\newcommand{\HIROUseFeatureTitleLayout}{\HIROUseTitleLayout{feature}}
+\newcommand{\HIROUseSymposiumTitleLayout}{\HIROUseTitleLayout{symposium}}
+\newcommand{\HIROUseEssayTitleLayout}{\HIROUseTitleLayout{essay}}
+\newcommand{\HIROUseAtelierTitleLayout}{\HIROUseFeatureTitleLayout}
+\newcommand{\HIROUseVZeroEightTitleLayout}{\HIROUseSymposiumTitleLayout}
+\renewcommand{\maketitle}{\HIROMakeTitle}
+\renewenvironment{abstract}{\par\noindent\begin{adjustwidth}{7mm}{7mm}\fontsize{9.45}{15.4}\selectfont\color{HiroText}\noindent\hangindent=4.2em\hangafter=1{\CJKsffamily\bfseries\fontsize{8.7}{13.5}\selectfont 摘\quad 要}\quad\ignorespaces}{\par\end{adjustwidth}\vspace{2mm}}
+\newcommand{\keywords}[1]{\begin{adjustwidth}{7mm}{7mm}\fontsize{9.15}{14.4}\selectfont\noindent\hangindent=4.2em\hangafter=1{\CJKsffamily\bfseries\fontsize{8.6}{13.2}\selectfont 关键词}\quad #1\end{adjustwidth}\vspace{5.5mm}\noindent{\color{HiroRule}\rule{\textwidth}{0.32pt}}\par\vspace{7.5mm}}
+
+\endinput

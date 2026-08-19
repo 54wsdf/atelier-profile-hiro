@@ -1,0 +1,17 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hiro/hiro-fonts}[2026/08/18 v0.9.3 AtelierTeX font compatibility]
+
+% HIRO does not bind its own system fonts. Font discovery, CJK role selection,
+% and the reusable Japanese/CJK fallback corpus are provided by AtelierTeX.
+% If future HIRO material exposes a genuinely new missing glyph, register it
+% here first; broadly reusable cases can later be promoted into the core corpus.
+\let\HiroSCFamily\AtelierSCFamily
+\let\HiroTCFamily\AtelierTCFamily
+\let\HiroJPFamily\AtelierJPFamily
+\let\HiroSCSans\AtelierSCSans
+\let\HiroSCText\AtelierSCText
+\let\HiroTCText\AtelierTCText
+\let\HiroJPText\AtelierJPText
+\let\HiroENText\AtelierENText
+
+\endinput

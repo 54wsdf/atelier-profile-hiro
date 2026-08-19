@@ -1,0 +1,18 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hiro/hiro-figures}[2026/08/20 v1.2.0 figure profile]
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+\captionsetup{font={small},labelfont={bf,sf},textfont={rm},labelsep=quad,skip=7pt,justification=raggedright,singlelinecheck=false,margin=0pt}
+\captionsetup[table]{position=top,skip=5pt}
+\newenvironment{hirowide}{\begin{adjustwidth}{-8.5mm}{-8.5mm}}{\end{adjustwidth}}
+% 防退化说明：未确定素材的占位图只使用白底、线框与灰黑文字，不能加入会被
+% 误认作既定视觉资产的填充色或模拟图像。
+\newcommand{\hiroplaceholder}[2][68mm]{{\setlength{\fboxsep}{0pt}\setlength{\fboxrule}{0.45pt}\fbox{\parbox[c][#1][c]{\dimexpr\linewidth-0.9pt\relax}{\centering{\sffamily\fontsize{7.6}{10.5}\selectfont\color{HiroInk}#2\par}}}}}
+\newcommand{\figsource}[1]{\par\vspace{2pt}{\raggedright\fontsize{7.5}{10.2}\selectfont\color{HiroLightGray}图源 / #1\par}}
+
+% 防退化说明：叙事照片与研究证据图必须保持不同语义；前者不编号但保留说明
+% 与来源，后者继续使用普通 figure、caption 和 figsource。
+\NewDocumentCommand{\HIROPhoto}{O{tbp} m m m}{\AtelierPhoto[#1]{#2}{#3}{#4}}
+\NewDocumentCommand{\HIROPhotoPlaceholder}{O{54mm} m m m}{\AtelierPhotoPlaceholder[#1]{#2}{#3}{#4}}
+
+\endinput

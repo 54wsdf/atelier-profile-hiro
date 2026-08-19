@@ -1,0 +1,88 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hiro/hiro-core}[2026/08/20 v1.2.0 HIRO publication metadata]
+\RequirePackage{zhnumber}
+
+\geometry{a4paper,left=27.5mm,right=27.5mm,top=23mm,bottom=25mm,headheight=13pt,headsep=7mm,footskip=12mm}
+
+\definecolor{HiroInk}{HTML}{111111}
+\definecolor{HiroText}{HTML}{1D1D1B}
+\definecolor{HiroGray}{HTML}{666662}
+\definecolor{HiroLightGray}{HTML}{969691}
+\definecolor{HiroRule}{HTML}{C6C6C0}
+\definecolor{HiroPale}{HTML}{F3F3F0}
+\definecolor{HiroPale2}{HTML}{E9E9E4}
+\definecolor{HiroAccent}{HTML}{111111}
+\newcommand{\HIROAccentColor}[1]{\colorlet{HiroAccent}{#1}}
+
+% 个人发起的第三方非官方支援模板；活动规则与最新信息以活动页面为准。
+\newcommand{\HIROConferenceName}{HIRO2026 / 篠泽广研讨会}
+\newcommand{\HIROShortName}{HIRO 2026}
+\newcommand{\HIRODate}{2026}
+\newcommand{\HIROOrganizer}{第三方非官方支援项目}
+\newcommand{\HIROTheme}{SHINOSAWA HIRO\enspace/\enspace ACGN STUDIES\enspace/\enspace LONGFORM}
+\newcommand{\HIROEventURL}{https://idol-master.top/sites/hiro2026}
+\newcommand{\HIROEventWebsite}[1]{\renewcommand{\HIROEventURL}{#1}}
+\newcommand{\hiropapertype}{Long-form Research Essay}
+\newcommand{\hiroid}{HIRO2026-XXX}
+\newcommand{\hiroshorttitle}{Untitled}
+\newcommand{\hirosubtitle}{}
+\newcommand{\hiroenglishtitle}{}
+\newcommand{\hirokicker}{SHINOSAWA HIRO / LONGFORM}
+\newcommand{\hiroaffiliation}{}
+\newcommand{\hirocontact}{}
+\newcommand{\hiroauthornote}{}
+\newcommand{\HIROPaperType}[1]{\renewcommand{\hiropapertype}{#1}}
+\newcommand{\HIROPaperID}[1]{\renewcommand{\hiroid}{#1}}
+\newcommand{\HIROShortTitle}[1]{\renewcommand{\hiroshorttitle}{#1}}
+\newcommand{\HIROSubtitle}[1]{\renewcommand{\hirosubtitle}{#1}}
+\newcommand{\HIROEnglishTitle}[1]{\renewcommand{\hiroenglishtitle}{#1}}
+\newcommand{\HIROKicker}[1]{\renewcommand{\hirokicker}{#1}}
+\newcommand{\HIROAffiliation}[1]{\renewcommand{\hiroaffiliation}{#1}}
+\newcommand{\HIROContact}[1]{\renewcommand{\hirocontact}{#1}}
+\newcommand{\HIROAuthorNote}[1]{\renewcommand{\hiroauthornote}{#1}}
+
+% Support repository-local tests, sibling-repository development and
+% vendor/submodule layouts without requiring document-specific paths.
+\newcommand{\HIROAssetRoot}{assets}
+\IfFileExists{assets/hiro2026-logo.png}{}{%
+  \IfFileExists{../atelier-profile-hiro/assets/hiro2026-logo.png}
+    {\renewcommand{\HIROAssetRoot}{../atelier-profile-hiro/assets}}
+    {\renewcommand{\HIROAssetRoot}{vendor/atelier-profile-hiro/assets}}}
+
+% 防退化说明：默认刊头使用经过完整解码检查的 HIRO2026 PNG；维护时必须同时
+% 检查图像完整性与实际页面显示。作者仍可通过公开接口替换刊头资产。
+\newcommand{\HIROMastheadImage}{\HIROAssetRoot/hiro2026-logo.png}
+\newcommand{\HIROMastheadImageWidth}{39mm}
+\newcommand{\HIROSetMastheadImage}[1]{\renewcommand{\HIROMastheadImage}{#1}}
+\newcommand{\HIROSetMastheadImageWidth}[1]{\renewcommand{\HIROMastheadImageWidth}{#1}}
+\newcommand{\HIROLogo}{\IfFileExists{\HIROMastheadImage}{\includegraphics[width=\HIROMastheadImageWidth]{\HIROMastheadImage}}{\sffamily\fontsize{19}{21}\selectfont HIRO2026}}
+\newcommand{\HIROMark}{\IfFileExists{\HIROAssetRoot/hiro2026-mark.png}{\includegraphics[width=24mm]{\HIROAssetRoot/hiro2026-mark.png}}{\sffamily\bfseries HIRO}}
+
+\AtBeginDocument{\fontsize{10.35}{16.1}\selectfont\pagestyle{hirostyle}}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
+\setlist{leftmargin=2em,itemsep=2pt,topsep=5pt,parsep=0pt,partopsep=0pt}
+\urlstyle{same}
+\emergencystretch=2em
+\microtypesetup{protrusion=false,expansion=false}
+
+\renewcommand{\thesection}{\zhnumber{\arabic{section}}}
+\renewcommand{\thesubsection}{\zhnumber{\arabic{subsection}}}
+\renewcommand{\thesubsubsection}{\arabic{subsubsection}}
+\titleformat{\section}{\CJKsffamily\bfseries\fontsize{14.2}{20}\selectfont\color{HiroInk}}{\thesection、}{0.15em}{}
+\titlespacing*{\section}{0pt}{24pt plus 3pt minus 2pt}{9pt plus 1pt minus 1pt}
+\titleformat{\subsection}{\CJKsffamily\bfseries\fontsize{11.1}{16.5}\selectfont\color{HiroInk}}{（\thesubsection）}{0.2em}{}
+\titlespacing*{\subsection}{0pt}{16pt plus 2pt minus 1pt}{6pt plus 1pt}
+\titleformat{\subsubsection}[runin]{\CJKsffamily\bfseries\fontsize{10.2}{15}\selectfont\color{HiroInk}}{\thesubsubsection.}{0.45em}{}[\quad]
+\titlespacing*{\subsubsection}{0pt}{11pt plus 1pt}{0pt}
+\pretocmd{\section}{\Needspace{7\baselineskip}}{}{}
+\pretocmd{\subsection}{\Needspace{4.5\baselineskip}}{}{}
+
+\makeatletter
+\renewcommand{\tagform@}[1]{\maketag@@@{\fontsize{8.8}{11}\selectfont(\ignorespaces#1\unskip\@@italiccorr)}}
+\makeatother
+
+\fancypagestyle{hirostyle}{\fancyhf{}\fancyhead[L]{\sffamily\fontsize{6.9}{8.5}\selectfont\color{HiroLightGray}\HIROShortName\enspace/\enspace\MakeUppercase{\hiropapertype}}\fancyhead[R]{\CJKsffamily\fontsize{7}{8.5}\selectfont\color{HiroLightGray}\hiroshorttitle}\fancyfoot[C]{\sffamily\fontsize{7.2}{9}\selectfont\color{HiroGray}\thepage}\renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0pt}}
+\fancypagestyle{hirofirst}{\fancyhf{}\fancyfoot[C]{\sffamily\fontsize{7.2}{9}\selectfont\color{HiroGray}\thepage}\renewcommand{\headrulewidth}{0pt}\renewcommand{\footrulewidth}{0pt}}
+
+\endinput

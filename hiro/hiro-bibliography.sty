@@ -1,0 +1,38 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hiro/hiro-bibliography}[2026/08/18 v0.10.2 HIRO renderer for ATX-ACGN-REF 0.4]
+
+% AtelierTeX owns the public bibliography semantics and resolves the formal
+% GB/T style available in the current TeX environment. HIRO supplies the
+% publication-specific rendering layer.
+\AtelierUseACGNBibliography
+
+\newcommand{\HIRORefTag}[1]{%
+  \begingroup
+  \setlength{\fboxsep}{1.35pt}%
+  \setlength{\fboxrule}{0.32pt}%
+  \fcolorbox{HiroRule}{white}{%
+    \sffamily\fontsize{5.7}{6.6}\selectfont\color{HiroGray}\strut #1}%
+  \endgroup}
+
+\DeclareFieldFormat{verba}{\HIRORefTag{#1}}
+
+\newcommand{\HIROReferenceLegend}{%
+  \par\vspace{2pt}%
+  \begin{hironote}[ATX-ACGN-REF 0.4 / \AtelierActualGBStyle]
+  \setlength{\parindent}{0pt}%
+  \HIRORefTag{GAME}\enspace 游戏本体\quad
+  \HIRORefTag{COMM · STEP4/EP37}\enspace 游戏剧情\quad
+  \HIRORefTag{ANIME · EP01}\enspace 动画单集\quad
+  \HIRORefTag{MANGA · CH01}\enspace 漫画单话\par\smallskip
+  \HIRORefTag{MUSIC}\enspace 音乐\quad
+  \HIRORefTag{LIVE}\enspace 演出\quad
+  \HIRORefTag{FAN LOCATOR}\enspace 定位资料\par\vspace{2pt}%
+  ATX-ACGN-REF 的正式目标基线为 GB/T 7714-2025；本次编译实际采用 \texttt{\AtelierActualGBStyle}。ATX Media Tag 提供跨媒介对象身份，STEP、episode、chapter、timestamp 等信息承担精确定位。
+  \end{hironote}}
+
+\renewcommand{\bibfont}{\fontsize{8.45}{12.55}\selectfont}
+\defbibheading{bibliography}[参考文献]{\section*{#1}\markboth{#1}{#1}}
+\setlength{\bibitemsep}{3.6pt}
+\AtBeginBibliography{\clubpenalty=10000\widowpenalty=10000}
+
+\endinput

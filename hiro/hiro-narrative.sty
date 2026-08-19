@@ -1,0 +1,18 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hiro/hiro-narrative}[2026/08/18 v0.10.3 narrative compatibility]
+\NewDocumentEnvironment{hiroquote}{}{\par\vspace{6pt}\begin{adjustwidth}{9mm}{9mm}\setlength{\parindent}{0pt}\fontsize{10.05}{16.2}\selectfont\color{HiroGray}\noindent\hspace{-5.6mm}{\color{HiroRule}\rule{0.58pt}{3.1em}}\hspace{5mm}\begin{minipage}[t]{0.94\linewidth}}{\end{minipage}\end{adjustwidth}\vspace{5pt}}
+% A source line after Japanese primary text may contain Simplified Chinese;
+% switch explicitly to the SC role instead of inheriting the JP font.
+\newcommand{\hiroquotesource}[1]{\par\vspace{2.8mm}\raggedleft\upshape\fontsize{8.3}{10.8}\selectfont{\HiroSCFamily --- #1}}
+\NewDocumentEnvironment{hiropullquote}{}{\par\vspace{11pt}\begin{adjustwidth}{12mm}{12mm}\setlength{\parindent}{0pt}\centering\HiroSCFamily\fontsize{15.2}{23}\selectfont\color{HiroInk}}{\par\end{adjustwidth}\vspace{11pt}}
+\NewDocumentEnvironment{hironote}{O{按}}{\par\vspace{8pt}\noindent{\color{HiroRule}\rule{\textwidth}{0.30pt}}\par\vspace{5pt}\noindent\begin{minipage}{\textwidth}\setlength{\parindent}{0pt}{\sffamily\bfseries\fontsize{6.8}{8}\selectfont\color{HiroLightGray}\MakeUppercase{#1}}\par\vspace{2.5pt}\fontsize{9.3}{14.6}\selectfont\color{HiroText}}{\end{minipage}\par\vspace{5pt}\noindent{\color{HiroRule}\rule{\textwidth}{0.30pt}}\par\vspace{8pt}}
+\newcommand{\hirokey}[2]{\par\vspace{3pt}\noindent{\CJKsffamily\fontsize{8.2}{12}\selectfont\bfseries\color{HiroLightGray}#1}\quad{\fontsize{9.6}{14.8}\selectfont\color{HiroText}#2}\par\vspace{3pt}}
+\NewDocumentEnvironment{HiroScene}{m m}{\par\Needspace{9\baselineskip}\vspace{14pt}\noindent{\color{HiroRule}\rule{\textwidth}{0.28pt}}\par\vspace{5pt}{\sffamily\fontsize{6.6}{8}\selectfont\color{HiroLightGray}\MakeUppercase{SCENE}\hfill #2\par}\vspace{2.5pt}{\HiroSCFamily\fontsize{12.2}{18}\selectfont\bfseries\color{HiroInk}#1\par}\vspace{5pt}\begin{adjustwidth}{5mm}{5mm}\setlength{\parindent}{2em}\fontsize{9.8}{15.7}\selectfont}{\par\end{adjustwidth}\vspace{8pt}}
+\NewDocumentEnvironment{HiroInterlude}{m}{\clearpage\thispagestyle{hirostyle}\vspace*{0.12\textheight}\begin{center}{\sffamily\fontsize{6.6}{8}\selectfont\color{HiroLightGray}INTERLUDE\par}\vspace{5mm}{\HiroSCFamily\bfseries\fontsize{18}{27}\selectfont\color{HiroInk}#1\par}\vspace{7mm}\begin{minipage}{0.72\textwidth}\setlength{\parindent}{2em}\fontsize{10.4}{17}\selectfont}{\end{minipage}\end{center}\clearpage}
+\NewDocumentEnvironment{HiroEpigraph}{m}{\par\vspace{10pt}\begin{adjustwidth}{18mm}{8mm}\setlength{\parindent}{0pt}\raggedleft\fontsize{10}{16}\selectfont\itshape\color{HiroGray}}{\par\vspace{3pt}{\fontsize{8}{10.5}\selectfont\upshape #1}\end{adjustwidth}\vspace{8pt}}
+\NewDocumentEnvironment{HiroDialogue}{}{\par\begin{adjustwidth}{8mm}{8mm}\setlength{\parindent}{0pt}\fontsize{9.7}{15.5}\selectfont}{\par\end{adjustwidth}\vspace{5pt}}
+\newcommand{\HiroSpeaker}[1]{\par\vspace{4pt}{\CJKsffamily\bfseries\fontsize{8}{10}\selectfont\color{HiroLightGray}#1}\quad\ignorespaces}
+\newcommand{\HiroSceneBreak}{\par\vspace{9pt}\begin{center}{\sffamily\color{HiroRule}\small ＊\qquad＊\qquad＊}\end{center}\vspace{9pt}}
+\NewDocumentEnvironment{HiroCoda}{}{\par\vspace{16pt}\begin{adjustwidth}{10mm}{10mm}\setlength{\parindent}{2em}\fontsize{10.7}{17.5}\selectfont}{\par\end{adjustwidth}\vspace{10pt}}
+
+\endinput

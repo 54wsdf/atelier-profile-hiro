@@ -1,0 +1,12 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hiro/hiro-layout-essay}[2026/08/20 v1.2.0 HIRO essay metadata aliases]
+
+% 防退化说明：本模块只提供 HIRO 命名空间别名，随笔刊页 renderer 和正文
+% profile 均由 AtelierTeX 维护；后续不得在这里复制标题页骨架或另建页面几何。
+\NewDocumentCommand{\HIRODeck}{m}{\AtelierDeck{#1}}
+\NewDocumentCommand{\HIROHeroImage}{m}{\AtelierSetHeroImage{#1}}
+\NewDocumentCommand{\HIROHeroCaption}{m}{\AtelierSetHeroCaption{#1}}
+\NewDocumentCommand{\HIROHeroCredit}{m}{\AtelierSetHeroCredit{#1}}
+\NewDocumentCommand{\HIROHeroWidth}{m}{\AtelierSetHeroWidth{#1}}
+
+\endinput

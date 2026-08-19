@@ -1,0 +1,11 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hiro/hiro-tables}[2026/08/17 v0.9 table profile]
+\setlength{\tabcolsep}{5.3pt}
+\renewcommand{\arraystretch}{1.36}
+\newcolumntype{L}[1]{>{\RaggedRight\arraybackslash}p{#1}}
+\newcolumntype{C}[1]{>{\Centering\arraybackslash}p{#1}}
+\newcommand{\hirotablerule}{\arrayrulecolor{HiroRule}}
+\newcommand{\hirotablereset}{\arrayrulecolor{black}}
+\newcommand{\HiroLongTableHead}[1]{\multicolumn{#1}{l}{\sffamily\fontsize{6.7}{8}\selectfont\color{HiroLightGray}CONTINUED FROM PREVIOUS PAGE}\\[-1pt]}
+
+\endinput

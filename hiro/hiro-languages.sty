@@ -1,0 +1,16 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{hiro/hiro-languages}[2026/08/17 v0.9 language compatibility]
+\newenvironment{HiroJapanese}{\begingroup\HiroJPFamily}{\endgroup}
+\newenvironment{HiroTraditional}{\begingroup\HiroTCFamily}{\endgroup}
+\newenvironment{HiroSimplified}{\begingroup\HiroSCFamily}{\endgroup}
+\newenvironment{HiroEnglish}{\begingroup\rmfamily}{\endgroup}
+\newcommand{\HiroJPQuote}[1]{\HiroJPText{「#1」}}
+\newcommand{\HiroJPDoubleQuote}[1]{\HiroJPText{『#1』}}
+\newcommand{\HiroZHQuote}[1]{“#1”}
+\NewDocumentEnvironment{HiroOriginal}{O{ja}}{%
+  \par\vspace{4pt}\begin{adjustwidth}{8mm}{8mm}\setlength{\parindent}{0pt}\fontsize{9.6}{15.2}\selectfont\color{HiroGray}%
+  \ifstrequal{#1}{ja}{\HiroJPFamily}{}\ifstrequal{#1}{zh-Hant}{\HiroTCFamily}{}%
+}{\par\end{adjustwidth}\vspace{2pt}}
+\NewDocumentEnvironment{HiroTranslation}{}{\begin{adjustwidth}{8mm}{8mm}\setlength{\parindent}{0pt}\fontsize{8.9}{14.3}\selectfont\color{HiroLightGray}}{\par\end{adjustwidth}\vspace{5pt}}
+
+\endinput

@@ -1,0 +1,72 @@
+% 防退化说明：本文件同时为 feature、symposium 与 essay 提供共享正文；三种
+% 排版必须使用同一组核心元数据和内容，确保比较只反映排版选择差异。
+\ifdefined\HIRODemoTitleLayout
+  \documentclass[titlelayout=\HIRODemoTitleLayout]{hiro2026}
+\else
+  \documentclass[titlelayout=feature]{hiro2026}
+\fi
+\addbibresource{examples/references.bib}
+
+\HIROPaperType{第三方支援样张}
+\HIROPaperID{HIRO2026-DEMO}
+\HIROShortTitle{HIRO2026 非官方支援模板}
+\HIROKicker{篠泽广 / 第三方支援项目}
+\title{HIRO2026 非官方支援排版模板}
+\HIROSubtitle{维护者个人发起，基于 AtelierTeX 制作}
+\HIROEnglishTitle{A Personal, Unofficial HIRO2026 Support Profile Built on AtelierTeX}
+\author{54wsdf / 个人支援项目}
+\HIROAffiliation{面向 HIRO2026 的非官方排版与投稿支援}
+\HIROContact{https://idol-master.top/sites/hiro2026}
+\HIROAuthorNote{本项目纯属个人制作，不是 HIRO2026 官方模板，与活动主办方无隶属、委托、合作或代表关系。活动规则以活动页面为准。}
+\ifdefined\HIRODemoEssayLayout
+  \HIRODeck{随笔刊页把阅读入口、作者信息与正文开篇放在同一页面，同时继续使用 HIRO2026 的刊头、章节、图表和参考文献体系。}
+\fi
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+本样张展示维护者个人发起、面向篠泽广研讨会（HIRO2026）的第三方非官方 LaTeX 支援模板。模板建立在 AtelierTeX 的多语种长文框架与 ATX-ACGN-REF 跨媒介引用体系之上，为 HIRO2026 主题写作提供刊头、题名区、章节层级、叙事环境与参考文献视觉。本项目与 HIRO2026 官方及活动主办方没有关系；活动日程、投稿规则与最终要求始终以活动网站公布的信息为准。
+\end{abstract}
+\keywords{篠泽广；学园偶像大师；HIRO2026；AtelierTeX；ACGN；LaTeX}
+
+% Feature 使用独立专题封面，Symposium 与 Essay 会在刊页后继续放置摘要；
+% 这里显式换页，让三种 README 首页都完整，并避免功能示例标题孤立在页尾。
+\clearpage
+
+\section{多语种与叙事环境}
+中文姓名“篠泽广”和日文姓名“篠澤 広”可以在同一篇长文中稳定排版。
+
+\begin{HiroOriginal}[ja]
+篠澤 広――日本語組版の確認用テキスト。
+\end{HiroOriginal}
+
+\begin{HiroTranslation}
+篠泽广——用于检查中文译文排版的示例文本。
+\end{HiroTranslation}
+
+\begin{HiroScene}{示例场景}{DEMO / SCENE 01}
+场景环境用于组织剧情材料或场景化转述，section 继续承担文章的论证层级。
+\end{HiroScene}
+
+\begin{HiroDialogue}
+\HiroSpeaker{角色 A}这里展示对话环境的第一段文本。
+
+\HiroSpeaker{角色 B}作者可以把角色对白与分析正文放在不同的视觉层级中。
+\end{HiroDialogue}
+
+\section{跨媒介参考文献}
+本节使用公开官方元数据展示 GAME、CHARACTER FILE、COMM 与 MUSIC。正式著录由 GB/T 7714 体系承担，HIRO2026 profile 负责专题视觉与 media tag 呈现。
+
+游戏本体可以直接引用为《学園アイドルマスター》\cite{gakumas_game}，角色资料引用篠澤広官方档案\cite{hiro_character_file}。作品内部剧情节点使用 postnote 保存精确 Locator，例如：
+
+\begin{verbatim}
+\cite[STEP1 / Episode 8]{hiro_commu_step1_08}
+\end{verbatim}
+
+实际渲染为剧情节点\cite[STEP1 / Episode 8]{hiro_commu_step1_08}。音乐材料可以并引官方曲目页与实体单曲页\cite{hiro_song_koukei,hiro_1st_single}。
+
+\HIROReferenceLegend
+\printbibliography
+
+\end{document}
