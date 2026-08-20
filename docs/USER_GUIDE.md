@@ -8,7 +8,8 @@
 
 - AtelierTeX；
 - 本仓库；
-- XeLaTeX 或 LuaLaTeX；
+- XeLaTeX（默认推荐，用于规范发布 PDF、分页基准与 README 预览）；
+- LuaLaTeX（兼容性检查）；
 - `latexmk`；
 - `biber`；
 - Poppler（需要生成 README 预览时使用 `pdftoppm`）。
@@ -256,6 +257,8 @@ assets/hiro2026-mark.png
 模板同时支持相邻仓库与 vendor / submodule 布局，并提供文本 fallback。资产说明见 [`../assets/README.md`](../assets/README.md)。
 
 ## 11. 编译、测试与 README 渲染
+
+两个引擎都受支持，但职责不同：XeLaTeX 是规范发布与视觉基准；LuaLaTeX 用于确认内容、引用、命令和字形在另一后端中仍然完整。双引擎分页可以不同，仓库预览不得改由 LuaLaTeX 生成。
 
 组件级编译：
 

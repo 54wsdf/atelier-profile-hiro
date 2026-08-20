@@ -184,7 +184,9 @@ hiro2026-essay-page1.png
 
 ## 编译与测试
 
-推荐使用 TeX Live 2026、XeLaTeX 或 LuaLaTeX、`latexmk`、`biber`；生成 README 预览还需要 Poppler / `pdftoppm`。
+推荐使用 TeX Live 2026、XeLaTeX、LuaLaTeX、`latexmk`、`biber`；生成 README 预览还需要 Poppler / `pdftoppm`。
+
+默认推荐 **XeLaTeX**：规范发布 PDF、分页基准以及仓库中的三张 README 预览均由 XeLaTeX 生成。**LuaLaTeX** 用于兼容性检查，验证内容、引用、命令与字形完整；不要求它与 XeLaTeX 产生完全相同的分页。
 
 ```powershell
 pwsh -File tests/compile-smoke.ps1 -Engine xelatex
@@ -206,6 +208,7 @@ atelier-profile-hiro/
 ├── docs/                      # 使用、模块、书目与渲染说明
 ├── tests/                     # 编译和 README 渲染脚本
 ├── PROJECT.md                 # 项目定位与第三方边界
+├── CONTRIBUTING.md            # 公开贡献与验证说明
 ├── CITATION.cff               # GitHub 引用元数据
 ├── LICENSE                    # LPPL-1.3c 正文
 ├── LICENSE_SCOPE.md           # 源码、视觉资产与商标边界
@@ -224,6 +227,7 @@ atelier-profile-hiro/
 ## 文档索引
 
 - [`PROJECT.md`](PROJECT.md)：项目定位、第三方状态与 AtelierTeX 分工；
+- [`CONTRIBUTING.md`](CONTRIBUTING.md)：公开贡献范围、构建与许可检查；
 - [`docs/USER_GUIDE.md`](docs/USER_GUIDE.md)：完整使用说明；
 - [`docs/MODULES_AND_STYLING.md`](docs/MODULES_AND_STYLING.md)：模块与样式职责；
 - [`docs/BIBLIOGRAPHY.md`](docs/BIBLIOGRAPHY.md)：GB/T 7714 + ATX-ACGN-REF；

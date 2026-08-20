@@ -4,6 +4,8 @@ HIRO2026 第三方支援模板采用本地编译测试。`compile-smoke.ps1` 验
 
 ## 基本命令
 
+规范发布和 README 预览使用 XeLaTeX；LuaLaTeX 是兼容性门。完整发布检查仍运行 `-Engine both`。
+
 ```powershell
 pwsh -File tests/compile-smoke.ps1 -Engine xelatex
 pwsh -File tests/compile-smoke.ps1 -Engine lualatex
