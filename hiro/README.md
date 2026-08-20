@@ -41,6 +41,10 @@
 
 `HiroSCFamily`、`HiroTCFamily`、`HiroJPFamily`、`HiroSCSans` 等别名映射到 AtelierTeX 的字体角色。公共字体发现与 fallback 由 AtelierTeX 维护。
 
+中文姓名使用 `\HiroNameHans`，日文正式姓名使用 `\HiroNameJapanese`。这两个
+语义接口确保共享汉字按内容语种进入同一字体族，避免大字号标题出现单字字重、
+字面或基线差异；不要通过替换姓名用字、单字缩放或局部假粗体处理。
+
 ## `hiro-languages.sty`
 
 负责 `HiroOriginal`、`HiroTranslation` 等多语种接口与 AtelierTeX 语言层之间的映射。

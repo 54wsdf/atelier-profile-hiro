@@ -4,9 +4,9 @@ HIRO2026 第三方模板通过精确 commit SHA 记录已经完成兼容验证�
 
 | 依赖 | 仓库 | 锁定版本 |
 | --- | --- | --- |
-| AtelierTeX | `54wsdf/AtelierTeX` | `26b94cfdb276e31dad9387c1e40eed303c703d0c` |
+| AtelierTeX | `54wsdf/AtelierTeX` | `7096ec5f9d0d5aff1cc4dc95a17d4e8948acf610` |
 
-该版本为 AtelierTeX 0.5.1，包含：
+该版本为 AtelierTeX 0.5.2，包含：
 
 - ATX-ACGN-REF 0.4；
 - GB/T 7714-2025 正式目标基线；
@@ -20,6 +20,7 @@ HIRO2026 第三方模板通过精确 commit SHA 记录已经完成兼容验证�
 - 三种平行排版各自独立的 TeX 入口、PDF 和 README PNG；
 - LPPL-1.3c Work 清单、`maintained` 状态与当前维护者声明；
 - LuaLaTeX 日文字形与粗体回退修正。
+- 简中、繁中与日文共享汉字的显式语种字形接口。
 
 > 防退化说明：这里锁定的是实际完成双引擎验收的干净根提交。后续升级时不得只改版本号或展示图片，必须同时更新 commit SHA，并重新运行三种排版的完整编译门。
 

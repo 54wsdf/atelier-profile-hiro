@@ -4,7 +4,7 @@
 % The Current Maintainer of this work is 54wsdf.
 % This work consists of the files listed in manifest.txt.
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{hiro/hiro-fonts}[2026/08/18 v0.9.3 AtelierTeX font compatibility]
+\ProvidesPackage{hiro/hiro-fonts}[2026/08/20 v0.9.4 AtelierTeX font compatibility]
 
 % HIRO does not bind its own system fonts. Font discovery, CJK role selection,
 % and the reusable Japanese/CJK fallback corpus are provided by AtelierTeX.
@@ -18,5 +18,22 @@
 \let\HiroTCText\AtelierTCText
 \let\HiroJPText\AtelierJPText
 \let\HiroENText\AtelierENText
+\let\HiroSCGlyphFamily\AtelierSCGlyphFamily
+\let\HiroSCGlyph\AtelierSCGlyph
+\let\HiroTCGlyph\AtelierTCGlyph
+\let\HiroJPGlyph\AtelierJPGlyph
+
+% 防退化说明：简中“篠泽广”与日文“篠澤 広”共享部分 Unicode 字符，
+% 但不能继续依赖无条件日文字形 fallback。简中姓名必须让三个字共享简中
+% 稀有字族，日文正式姓名则整体进入 JP 角色；后续不得改回逐字缩放或假粗体。
+\newcommand{\HiroNameHans}{{\HiroSCGlyphFamily\HiroSCGlyph{7BE0}泽广}}
+\newcommand{\HiroNameJapanese}{\HiroJPText{篠澤 広}}
+
+% 防退化说明：直接码位用于排版字形，PDF 书签与元数据仍须保存可搜索文本；
+% 后续增加标题接口时不能让 \char 控制序列泄漏到 PDF string。
+\pdfstringdefDisableCommands{%
+  \def\HiroNameHans{篠泽广}%
+  \def\HiroNameJapanese{篠澤 広}%
+}
 
 \endinput
