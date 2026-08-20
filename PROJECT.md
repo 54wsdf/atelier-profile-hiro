@@ -6,7 +6,7 @@
 
 本项目仅为活动主题长文提供排版、叙事结构与跨媒介参考文献支持。它不是官方模板，与 HIRO2026 官方、活动主办方、`idol-master.top`、《偶像大师》官方及相关权利方无隶属、委托、合作或代表关系。活动日程、征稿要求、投稿方式和最终规则以活动页面公布的信息为准。
 
-仓内 `hiro2026-logo.png` 与 `hiro2026-mark.png` 已获原作者许可，可进行二次创作并用于本项目公开展示和模板分发。该许可只解决本项目中的素材使用，不赋予项目官方身份，也不自动扩展为作品、角色或商标的其他许可。
+HIRO2026 Logo 发布方已通过公开笔记说明可自由取用 Logo 进行使用或创作。仓内 `hiro2026-logo.png`、`hiro2026-mark.png` 与含图预览按该公开许可单独记录；许可来源见 [`LICENSES/LicenseRef-HIRO2026-Logo-Public-Use.txt`](LICENSES/LicenseRef-HIRO2026-Logo-Public-Use.txt)。该许可不赋予本项目官方身份，也不自动扩展为作品、角色、其他图片或商标的许可。
 
 ## 与 HIRO2026 的关系
 
@@ -64,7 +64,7 @@ HIRO2026 非官方支援排版扩展
 
 “THE IDOLM@STER”“学園アイドルマスター”“篠澤 広 / 篠泽广”等作品、角色、项目名称与相关商标归各自权利人所有。它们在本仓库中用于说明模板适用场景、提供主题示例与标识引用对象。
 
-模板源码许可见 [`LICENSE`](LICENSE)。视觉资产及第三方素材的说明见 [`assets/README.md`](assets/README.md)。
+模板源码、文档、示例与测试采用 LPPL-1.3c；视觉资产另按公开 Logo 使用与创作许可处理。完整分类见 [`LICENSE_SCOPE.md`](LICENSE_SCOPE.md)、[`manifest.txt`](manifest.txt)、[`LICENSE`](LICENSE) 与 [`assets/README.md`](assets/README.md)。
 
 ## 维护者
 

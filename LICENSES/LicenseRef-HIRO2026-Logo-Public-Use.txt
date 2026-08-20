@@ -1,0 +1,40 @@
+License name: HIRO2026 Logo Public Use and Creation Permission
+SPDX identifier: LicenseRef-HIRO2026-Logo-Public-Use
+
+一、公开许可来源
+
+发布标题：HIRO2026——会议logo公开
+发布账号：cocop
+公开页面：https://www.xiaohongshu.com/explore/6a82f39c00000000080104dc
+原始短链接：https://xhslink.cn/o/65PCwRgdHc4
+公开笔记 ID：6a82f39c00000000080104dc
+本记录核对日期：2026-08-20
+
+许可内容摘录：
+
+“欢迎各位自由取用HIRO2026的logo进行使用或创作”
+
+公开说明另表示：发布相关稿件时，如使用者愿意，可以带上发布方的话题；该表述是自愿建议，不是本记录新增的强制条件。
+
+二、本仓库对应文件
+
+1. 原始图形资产
+
+- assets/hiro2026-logo.png
+  SHA-256: 3DE69BE0CD0F8C636AFDCAE8F879C30D03CE30A7985467A9A745610C366E45CE
+- assets/hiro2026-mark.png
+  SHA-256: A80DA21D875B3807A16065A4EC29B291DE483837F65DA7F6F9D06BA25D2F2B0A
+
+2. 含上述图形资产的项目生成预览
+
+- docs/assets/rendered/hiro2026-feature-page1.png
+- docs/assets/rendered/hiro2026-symposium-page1.png
+- docs/assets/rendered/hiro2026-essay-page1.png
+
+三、边界说明
+
+本文件忠实记录公开页面已表达的 Logo 使用与创作许可，不增补公开说明中没有出现的标准许可证名称、商业使用条款、再许可条款、不可撤销条款或官方背书。
+
+该许可与仓库 LaTeX 源码采用的 LPPL-1.3c 相互独立。它不授予 HIRO2026 名称、活动身份、作品名称、角色名称、其他图片或商标的额外权利，也不表示 atelier-profile-hiro 是 HIRO2026 官方项目。
+
+公开来源如发生迁移或链接失效，本记录中的笔记 ID、标题、账号、核对日期和文件摘要用于保留可追溯性；不得在没有新公开证据的情况下扩大许可范围。

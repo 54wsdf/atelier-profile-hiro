@@ -12,7 +12,7 @@
   · <a href="examples/profile-demo.tex">示例源码</a>
 </p>
 
-`atelier-profile-hiro` 完全由维护者个人发起和维护，仅为 HIRO2026 相关写作、排版与投稿准备提供工具支援。本项目不是官方模板，与 HIRO2026 官方、活动主办方、`idol-master.top`、《偶像大师》官方及相关权利方无隶属、委托、合作或代表关系。仓内 HIRO2026 图形资产已获原作者许可，可进行二次创作并用于本项目公开展示；该素材许可不构成活动官方认可。
+`atelier-profile-hiro` 完全由维护者个人发起和维护，仅为 HIRO2026 相关写作、排版与投稿准备提供工具支援。本项目不是官方模板，与 HIRO2026 官方、活动主办方、`idol-master.top`、《偶像大师》官方及相关权利方无隶属、委托、合作或代表关系。HIRO2026 Logo 发布方已[公开说明](https://www.xiaohongshu.com/explore/6a82f39c00000000080104dc)可自由取用 Logo 进行使用或创作；该许可不构成活动方对本项目的官方认可。
 
 活动日程、征稿要求、投稿方式以及最终规则请以 **[HIRO2026 活动页面](https://idol-master.top/sites/hiro2026)** 为准；本仓库不发布或解释官方规则。
 
@@ -207,7 +207,10 @@ atelier-profile-hiro/
 ├── tests/                     # 编译和 README 渲染脚本
 ├── PROJECT.md                 # 项目定位与第三方边界
 ├── CITATION.cff               # GitHub 引用元数据
-├── LICENSE                    # LaTeX 源码许可
+├── LICENSE                    # LPPL-1.3c 正文
+├── LICENSE_SCOPE.md           # 源码、视觉资产与商标边界
+├── LICENSES/                  # Logo 公开许可记录
+├── manifest.txt               # LPPL Work 逐文件清单
 ├── DEPENDENCY_LOCK.md
 └── CHANGELOG.md
 ```
@@ -216,7 +219,7 @@ atelier-profile-hiro/
 
 本项目纯属维护者个人兴趣发起的第三方支援项目，与 HIRO2026 官方及活动主办方没有关系。HIRO2026 活动信息请直接查阅 **[活动页面](https://idol-master.top/sites/hiro2026)**；本仓库不复制可能变化的征稿日期、活动安排或提交规则。
 
-项目名称、作品名称、角色名称与相关商标归各自权利人所有。模板源码的许可与视觉资产的原作者许可边界分别见 [`LICENSE`](LICENSE) 和 [`assets/README.md`](assets/README.md)。
+项目名称、作品名称、角色名称与相关商标归各自权利人所有。模板源码与文档采用 LPPL-1.3c；Logo、Mark 及含图预览按公开 Logo 使用与创作许可单独处理。完整边界见 [`LICENSE_SCOPE.md`](LICENSE_SCOPE.md)、[`manifest.txt`](manifest.txt)、[`LICENSE`](LICENSE) 与 [`LICENSES/LicenseRef-HIRO2026-Logo-Public-Use.txt`](LICENSES/LicenseRef-HIRO2026-Logo-Public-Use.txt)。
 
 ## 文档索引
 
@@ -229,4 +232,5 @@ atelier-profile-hiro/
 - [`tests/README.md`](tests/README.md)：测试说明；
 - [`docs/assets/rendered/README.md`](docs/assets/rendered/README.md)：README 图像生成规则；
 - [`assets/README.md`](assets/README.md)：视觉资产与权利边界；
+- [`LICENSE_SCOPE.md`](LICENSE_SCOPE.md)：分层许可范围与非官方状态；
 - [`CITATION.cff`](CITATION.cff)：项目引用元数据。

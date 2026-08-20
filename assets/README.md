@@ -15,7 +15,13 @@ assets/hiro2026-mark.png
 
 ## 使用范围
 
-原作者已允许对 `hiro2026-logo.png` 与 `hiro2026-mark.png` 进行二次创作，并允许在本项目公开仓库、模板样张和随模板分发的页面中使用。许可记录由维护者保存。
+HIRO2026 Logo 发布方通过公开笔记《HIRO2026——会议logo公开》说明，可自由取用 HIRO2026 Logo 进行使用或创作。公开说明另将发布稿件时携带相关话题表述为自愿建议，并非强制条件。
+
+- 发布账号：`cocop`
+- 公开笔记 ID：`6a82f39c00000000080104dc`
+- [公开页面](https://www.xiaohongshu.com/explore/6a82f39c00000000080104dc)
+- [原始短链接](https://xhslink.cn/o/65PCwRgdHc4)
+- 仓库许可记录：[`LICENSES/LicenseRef-HIRO2026-Logo-Public-Use.txt`](../LICENSES/LicenseRef-HIRO2026-Logo-Public-Use.txt)
 
 本仓库由维护者个人发起，面向篠泽广研讨会（HIRO2026）的第三方排版需求。上述素材许可不表示本项目获得 HIRO2026 官方、`idol-master.top`、活动主办方、《偶像大师》官方或相关权利方的委托、合作、代表身份或认可。
 
@@ -23,9 +29,9 @@ assets/hiro2026-mark.png
 
 ## 许可证边界
 
-仓库根目录 [`LICENSE`](../LICENSE) 的 LPPL-1.3c 许可针对本项目的 LaTeX 源码。**该许可不会自动覆盖第三方商标、作品素材或来源另有约定的视觉资产。**
+仓库根目录 [`LICENSE`](../LICENSE) 的 LPPL-1.3c 许可适用于 [`manifest.txt`](../manifest.txt) 所列的本项目源码、文档、示例与测试。**该许可不覆盖本目录的 Logo、Mark、含图预览、第三方商标或作品素材。**
 
-该原作者许可适用于本项目中的二次创作、公开展示与模板分发；它不自动允许第三方把图形资产脱离本项目单独再许可，也不覆盖作品名称、角色名称、商标或其他第三方素材。
+本仓库以自定义 SPDX LicenseRef `LicenseRef-HIRO2026-Logo-Public-Use` 忠实记录上述公开使用与创作许可，不将其扩大解释为 CC、LPPL 或其他标准许可证。它不覆盖作品名称、角色名称、其他图像、商标或官方身份。
 
 为便于核验，当前文件摘要为：
 

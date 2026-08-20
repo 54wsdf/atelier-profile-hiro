@@ -1,0 +1,41 @@
+# atelier-profile-hiro LPPL Work manifest
+#
+# Copyright 2026 54wsdf
+# SPDX-License-Identifier: LPPL-1.3c
+#
+# This work has the LPPL maintenance status `maintained`.
+# The Current Maintainer of this work is 54wsdf.
+# The Work consists exactly of the files listed below.
+
+CHANGELOG.md
+CITATION.cff
+DEPENDENCY_LOCK.md
+LICENSE_SCOPE.md
+PROJECT.md
+README.md
+assets/README.md
+docs/BIBLIOGRAPHY.md
+docs/MODULES_AND_STYLING.md
+docs/USER_GUIDE.md
+docs/assets/rendered/README.md
+examples/README.md
+examples/profile-demo-essay.tex
+examples/profile-demo-symposium.tex
+examples/profile-demo.tex
+examples/references.bib
+hiro/README.md
+hiro/hiro-bibliography.sty
+hiro/hiro-core.sty
+hiro/hiro-figures.sty
+hiro/hiro-fonts.sty
+hiro/hiro-languages.sty
+hiro/hiro-layout-editorial.sty
+hiro/hiro-layout-essay.sty
+hiro/hiro-narrative.sty
+hiro/hiro-tables.sty
+hiro2026.cls
+manifest.txt
+tests/README.md
+tests/compile-smoke.ps1
+tests/render-readme-preview.ps1
+tests/verify-public-boundary.ps1
