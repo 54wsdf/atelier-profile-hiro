@@ -45,7 +45,9 @@ try {
             & latexmk "-$selectedEngine" -halt-on-error -interaction=nonstopmode "-outdir=$outDir" $specimen.Source
             if ($LASTEXITCODE -ne 0) { throw "Profile compilation failed: $selectedEngine $($specimen.Name)" }
             $log = Join-Path $outDir "$($specimen.JobName).log"
-            if (Select-String -Path $log -Pattern 'Missing character:|Undefined control sequence|LaTeX Error:|Citation .+ undefined|There were undefined references' -Quiet) {
+            # 防退化说明：LuaLaTeX 的简中可变字体未绑定粗体时，标题仍可生成
+            # PDF，却会把粗体静默换成常规字重；后续不得把这种输出视为通过。
+            if (Select-String -Path $log -Pattern 'Missing character:|Undefined control sequence|LaTeX Error:|Citation .+ undefined|There were undefined references|Font shape .*/b/n.* undefined' -Quiet) {
                 throw "Profile log QA failed: $selectedEngine $($specimen.Name)"
             }
             $pdf = Join-Path $outDir "$($specimen.JobName).pdf"

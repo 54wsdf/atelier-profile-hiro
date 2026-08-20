@@ -24,6 +24,7 @@ workspace/
 ## 编译检查重点
 
 - `Missing character:`；
+- CJK 粗体被静默替换为常规字重；
 - `Undefined control sequence`；
 - `LaTeX Error:`；
 - undefined citation / reference；

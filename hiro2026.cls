@@ -6,7 +6,7 @@
 % 防退化说明：上述声明用于明确 LPPL 的维护状态与 Work 边界；后续不得只保留
 % SPDX 标识而删除维护者、维护状态或 manifest 引用。
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{hiro2026}[2026/08/20 v1.2.2 unofficial HIRO2026 profile for AtelierTeX 0.5.2]
+\ProvidesClass{hiro2026}[2026/08/20 v1.2.3 unofficial HIRO2026 profile for AtelierTeX 0.5.3]
 
 % 防退化说明：正文阅读 profile 与标题页排版是两条独立选择。默认保持
 % editorial；essay 必须显式选择，后续不得用标题页选项偷偷改变正文语义。
