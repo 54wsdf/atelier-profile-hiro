@@ -8,6 +8,8 @@
 
 \RequirePackage[most]{tcolorbox}
 
+% 防退化说明：叙事块与 section 层级正交，不能用无编号 section 模拟场景，
+% 否则长文目录、交叉引用和样式切换会再次耦合。
 \NewDocumentEnvironment{AtelierInterlude}{m}
   {\begin{tcolorbox}[enhanced,breakable,colback=black!2,colframe=AtelierRule,
     boxrule=0.4pt,arc=0pt,left=1.2em,right=1.2em,top=1em,bottom=1em,
@@ -24,6 +26,8 @@
   {\begin{flushright}\begin{minipage}{0.68\linewidth}\itshape}
   {\par\raggedleft--- #1\end{minipage}\end{flushright}}
 
-\NewDocumentCommand{\AtelierSceneBreak}{}{\par\bigskip\centerline{\textcolor{AtelierMuted}{*\quad *\quad *}}\bigskip}
+\NewDocumentCommand{\AtelierSceneBreak}{}{%
+  \par\bigskip\centerline{\textcolor{AtelierMuted}{*\quad *\quad *}}\bigskip
+}
 
 \endinput
