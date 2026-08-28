@@ -4,9 +4,10 @@
 
 ## 1. 环境与目录
 
+从 profile 1.3.0 起，AtelierTeX 0.5.3 的已验证运行时已经直接包含在本仓库。普通作者只需要下载 `atelier-profile-hiro`，不再需要第二个仓库。
+
 推荐环境：
 
-- AtelierTeX；
 - 本仓库；
 - XeLaTeX（默认推荐，用于规范发布 PDF、分页基准与 README 预览）；
 - LuaLaTeX（兼容性检查）；
@@ -18,11 +19,22 @@
 
 ```text
 workspace/
-├── AtelierTeX/
 └── atelier-profile-hiro/
 ```
 
-精确依赖版本见 [`../DEPENDENCY_LOCK.md`](../DEPENDENCY_LOCK.md)。
+仓库内已经包含：
+
+```text
+atelier.cls
+atelier/
+profiles/editorial.sty
+profiles/essay.sty
+hiro2026.cls
+hiro/
+assets/
+```
+
+精确的 AtelierTeX 上游来源 commit 与升级规则见 [`../DEPENDENCY_LOCK.md`](../DEPENDENCY_LOCK.md)。
 
 ## 2. 文档入口
 
@@ -30,7 +42,7 @@ workspace/
 \documentclass[titlelayout=feature]{hiro2026}
 ```
 
-`hiro2026.cls` 加载 AtelierTeX 的 `editorial` profile，再叠加 HIRO2026 的 publication identity、章节、叙事和参考文献视觉。
+`hiro2026.cls` 加载同仓库内置的 AtelierTeX `editorial` profile，再叠加 HIRO2026 的 publication identity、章节、叙事和参考文献视觉。
 
 标题页提供三个并列选择：
 
@@ -40,7 +52,7 @@ workspace/
 \documentclass[profile=essay,titlelayout=essay]{hiro2026} % 随笔刊页
 ```
 
-`feature` 适合独立封面和专题展示；`symposium` 适合在首页集中呈现活动信息、稿件编号、作者与摘要；`essay` 适合文化随笔、观察札记和叙事型长文。`titlelayout=v08` 是 `symposium` 的兼容名称，可继续主动选择。未来新增排版继续使用 AtelierTeX 标题页注册表，HIRO 只映射元数据与资产。
+`feature` 适合独立封面和专题展示；`symposium` 适合在首页集中呈现活动信息、稿件编号、作者与摘要；`essay` 适合文化随笔、观察札记和叙事型长文。`titlelayout=v08` 是 `symposium` 的兼容名称，可继续主动选择。
 
 随笔刊页可以增加 deck：
 
@@ -68,7 +80,7 @@ workspace/
 
 `\HIROShortTitle` 用于后续页页眉，建议保持简短。
 
-模板默认刊头以 HIRO2026 / 篠泽广研讨会为主题，并明确标记为第三方非官方支援项目。模板中的活动文字仅用于排版示例，不构成官方信息；若活动页面调整正式英文名、日期或视觉信息，请以活动页面为准。
+模板默认刊头以 HIRO2026 / 篠泽广研讨会为主题，并明确标记为第三方非官方支援项目。模板中的活动文字仅用于排版示例，不构成官方信息。
 
 ## 4. 章节结构
 
@@ -117,23 +129,17 @@ Pull quote：
 
 ## 6. 叙事环境
 
-场景：
-
 ```latex
 \begin{HiroScene}{示例场景}{STEP / EPISODE}
 这里放场景化转述或分析性叙事。
 \end{HiroScene}
 ```
 
-幕间：
-
 ```latex
 \begin{HiroInterlude}{幕间标题}
 用于章节之间的强转场。
 \end{HiroInterlude}
 ```
-
-对话：
 
 ```latex
 \begin{HiroDialogue}
@@ -144,8 +150,6 @@ Pull quote：
 第二段对话。
 \end{HiroDialogue}
 ```
-
-题辞与尾声：
 
 ```latex
 \begin{HiroEpigraph}{来源}
@@ -161,7 +165,7 @@ Pull quote：
 
 ## 7. 多语种
 
-多语种后端来自 AtelierTeX。推荐角色：
+多语种后端来自仓库内置 AtelierTeX 运行时。推荐角色：
 
 - 简体中文正文 → SC；
 - 繁体中文正文 → TC；
@@ -185,16 +189,11 @@ Pull quote：
 
 视觉材料可以包括游戏截图、官方角色页、卡面、PV/MV 画面、作者自绘分析图等。模板负责图片与图注的正式页面表现；素材来源、使用权限与必要的 locator 由作者根据具体文章处理。
 
-建议在图注中记录：
-
-- 作品 / 页面名称；
-- route / STEP / episode / chapter；
-- 卡面、PV、Live 或页面定位；
-- 必要时记录 timestamp 与访问日期。
+建议在图注中记录作品 / 页面名称、route / STEP / episode / chapter、卡面、PV、Live 或页面定位，必要时记录 timestamp 与访问日期。
 
 ## 9. 参考文献
 
-HIRO2026 通过 AtelierTeX 使用 ATX-ACGN-REF。正式目标基线为 GB/T 7714-2025，实际样式由当前 TeX 环境决定，并可通过 `\AtelierActualGBStyle` 查看。
+HIRO2026 通过内置 AtelierTeX 使用 ATX-ACGN-REF。正式目标基线为 GB/T 7714-2025，实际样式由当前 TeX 环境决定，并可通过 `\AtelierActualGBStyle` 查看。
 
 稿件添加：
 
@@ -237,9 +236,9 @@ verba = {LIVE · STAGE}
 assets/hiro2026-logo.png
 ```
 
-它是 HIRO2026 publication identity 的图形刊头，也是三种标题页视觉层级的一部分。公开样张测试要求真实文件存在并被加载；普通作者工程在文件缺失时仍可使用文字 `HIRO2026` fallback。
+它是 HIRO2026 publication identity 的图形刊头，也是三种标题页视觉层级的一部分。公开样张测试要求真实文件存在并被加载，不能让文字 fallback 冒充正式渲染。
 
-刊头图是可替换的 publication slot。需要使用经确认可分发的会议宣传图或自定义头图时，可以在正文导言区设置：
+刊头图是可替换的 publication slot：
 
 ```latex
 \HIROSetMastheadImage{assets/my-approved-masthead.png}
@@ -254,7 +253,7 @@ assets/hiro2026-logo.png
 assets/hiro2026-mark.png
 ```
 
-模板同时支持相邻仓库与 vendor / submodule 布局，并提供文本 fallback。资产说明见 [`../assets/README.md`](../assets/README.md)。
+普通用户不需要任何相邻仓库或 submodule 才能找到默认资产和基础类文件。
 
 ## 11. 编译、测试与 README 渲染
 
@@ -268,9 +267,9 @@ pwsh -File tests/compile-smoke.ps1 -Engine lualatex
 pwsh -File tests/compile-smoke.ps1 -Engine both
 ```
 
-测试会清理旧输出、加载相邻 AtelierTeX，并检查常见编译错误与缺字问题。
+测试会清理旧输出，只加载当前仓库内的 `atelier.cls`、`atelier/`、`profiles/`、`hiro2026.cls` 与 HIRO 资产，并检查常见编译错误、缺字以及真实刊头加载。
 
-README 首页预览必须从真实模板编译出的 PDF 生成：
+README 首页预览：
 
 ```powershell
 pwsh -File tests/render-readme-preview.ps1 -Engine xelatex
@@ -282,21 +281,24 @@ pwsh -File tests/render-readme-preview.ps1 -Engine xelatex
 
 | 修改对象 | 文件 |
 | --- | --- |
-| 标题页公共骨架与排版注册表 | AtelierTeX `atelier/core.sty` |
+| 标题页公共骨架与排版注册表 | `atelier/core.sty` |
 | HIRO 刊头资产与元数据映射 | `hiro/hiro-layout-editorial.sty` / `hiro/hiro-core.sty` |
 | 页边距、章节、页眉页脚 | `hiro/hiro-core.sty` |
 | 引文、幕间、场景、对白 | `hiro/hiro-narrative.sty` |
 | 图像与图注 | `hiro/hiro-figures.sty` |
 | 表格 | `hiro/hiro-tables.sty` |
-| 参考文献标签 renderer | `hiro/hiro-bibliography.sty` |
-| 字体探测 | AtelierTeX `fonts.sty` |
-| 简中 / 繁中 / 日文语义 | AtelierTeX `languages.sty` |
+| 参考文献公共语义 | `atelier/bibliography.sty` |
+| 参考文献 HIRO renderer | `hiro/hiro-bibliography.sty` |
+| 字体探测 | `atelier/fonts.sty` |
+| 简中 / 繁中 / 日文语义 | `atelier/languages.sty` |
+
+这些 AtelierTeX 文件已经随仓库分发，但来源仍由 [`../DEPENDENCY_LOCK.md`](../DEPENDENCY_LOCK.md) 锁定；修改公共运行时前应考虑是否同时回推上游 AtelierTeX。
 
 ## 13. 发布前检查
 
 - 对照 HIRO2026 活动页面确认仍适用的活动信息；
 - 检查作者、标题、单位与联系方式；
-- 检查刊头图已从真实资产加载，且没有退回文字 fallback；
+- 检查刊头图已从 `assets/hiro2026-logo.png` 真实加载；
 - 检查多语种字体和原文；
 - 核对游戏剧情、角色页、音乐、Live 等 locator；
 - 检查 media tag 与 GB/T 7714 输出；
