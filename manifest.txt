@@ -14,6 +14,17 @@ DEPENDENCY_LOCK.md
 LICENSE_SCOPE.md
 PROJECT.md
 README.md
+atelier.cls
+atelier/bibliography.sty
+atelier/core.sty
+atelier/essay.sty
+atelier/figures.sty
+atelier/fonts.sty
+atelier/languages.sty
+atelier/layout.sty
+atelier/narrative.sty
+atelier/qa.sty
+atelier/tables.sty
 assets/README.md
 docs/BIBLIOGRAPHY.md
 docs/MODULES_AND_STYLING.md
@@ -36,6 +47,8 @@ hiro/hiro-narrative.sty
 hiro/hiro-tables.sty
 hiro2026.cls
 manifest.txt
+profiles/editorial.sty
+profiles/essay.sty
 tests/README.md
 tests/compile-smoke.ps1
 tests/render-readme-preview.ps1
