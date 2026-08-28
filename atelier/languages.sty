@@ -1,0 +1,41 @@
+% Copyright 2026 54wsdf
+% SPDX-License-Identifier: LPPL-1.3c
+% This work has the LPPL maintenance status `maintained`.
+% The Current Maintainer of this work is 54wsdf.
+% This work consists of the files listed in manifest.txt.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{atelier/languages}[2026/08/17 v0.1.0 semantic language blocks]
+
+\RequirePackage{csquotes}
+\RequirePackage{changepage}
+
+% 防退化说明：语言环境只声明内容语种，不要求作者手工切字体或字号；
+% 未来增加专门后端时必须保持现有环境签名兼容。
+\NewDocumentEnvironment{AtelierLanguage}{m}
+  {\par\begingroup\def\AtelierCurrentLanguage{#1}%
+    \ifstrequal{#1}{ja}{\AtelierJPFamily}{}%
+    \ifstrequal{#1}{zh-Hant}{\AtelierTCFamily}{}%
+    \ifstrequal{#1}{zh-Hans}{\AtelierSCFamily}{}%
+    \ifstrequal{#1}{en}{\rmfamily}{}}
+  {\par\endgroup}
+
+\NewDocumentEnvironment{AtelierTranslation}{m}
+  {\begin{quote}\small\color{AtelierMuted}\textsc{#1}\quad}
+  {\end{quote}}
+
+\NewDocumentCommand{\AtelierForeignTitle}{m m}{%
+  \textit{#2}\textsuperscript{\scriptsize\textsc{#1}}
+}
+
+\NewDocumentEnvironment{AtelierOriginal}{O{ja}}
+  {\par\smallskip\begin{adjustwidth}{8mm}{8mm}\setlength{\parindent}{0pt}\small\color{AtelierMuted}%
+   \ifstrequal{#1}{ja}{\AtelierJPFamily}{}%
+   \ifstrequal{#1}{zh-Hant}{\AtelierTCFamily}{}%
+   \ifstrequal{#1}{zh-Hans}{\AtelierSCFamily}{}}
+  {\par\end{adjustwidth}\smallskip}
+
+\NewDocumentCommand{\AtelierJPQuote}{m}{\AtelierJPText{「#1」}}
+\NewDocumentCommand{\AtelierJPDoubleQuote}{m}{\AtelierJPText{『#1』}}
+\NewDocumentCommand{\AtelierZHQuote}{m}{“#1”}
+
+\endinput

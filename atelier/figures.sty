@@ -1,0 +1,63 @@
+% Copyright 2026 54wsdf
+% SPDX-License-Identifier: LPPL-1.3c
+% This work has the LPPL maintenance status `maintained`.
+% The Current Maintainer of this work is 54wsdf.
+% This work consists of the files listed in manifest.txt.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{atelier/figures}[2026/08/20 v0.2.0 figure and editorial-photo semantics]
+
+\RequirePackage{graphicx}
+\RequirePackage{caption}
+\RequirePackage{subcaption}
+
+\captionsetup{font=small,labelfont=bf,labelsep=quad}
+
+% 防退化说明：研究图件保留编号、图题与来源说明，不能把证据图降级为装饰图片。
+\NewDocumentCommand{\AtelierFigure}{O{tbp} m m m}{%
+  \begin{figure}[#1]
+    \centering
+    \includegraphics[width=\linewidth]{#2}
+    \caption{#3\par\small\color{AtelierMuted}#4}
+  \end{figure}
+}
+
+% 防退化说明：叙事照片可以不进入学术图序，但仍须保留说明与来源；后续不得
+% 用无语义的 includegraphics 替代该接口，也不得把研究证据图误用为不编号照片。
+\NewDocumentCommand{\AtelierPhoto}{O{tbp} m m m}{%
+  \begin{figure}[#1]
+    \centering
+    \includegraphics[width=\linewidth]{#2}
+    \caption*{\raggedright\fontsize{8.4}{11.8}\selectfont #3%
+      \ifstrempty{#4}{}{\par\vspace{1pt}{\sffamily\fontsize{6.8}{8.8}\selectfont\color{AtelierMuted}#4}}}
+  \end{figure}%
+}
+
+% 防退化说明：素材未定时只允许白底、黑色线框和灰黑文字占位，不能添加会被
+% 误认作既定主题色或真实摄影内容的填充与装饰。
+\NewDocumentCommand{\AtelierPhotoPlaceholder}{O{54mm} m m m}{%
+  \begin{figure}[tbp]
+    \centering
+    \begingroup
+      \setlength{\fboxsep}{0pt}%
+      \setlength{\fboxrule}{0.45pt}%
+      \fbox{\parbox[c][#1][c]{0.94\linewidth}{%
+        \centering\sffamily\fontsize{7.2}{10.5}\selectfont\color{AtelierInk}#2}}
+    \endgroup
+    \caption*{\raggedright\fontsize{8.4}{11.8}\selectfont #3%
+      \ifstrempty{#4}{}{\par\vspace{1pt}{\sffamily\fontsize{6.8}{8.8}\selectfont\color{AtelierMuted}#4}}}
+  \end{figure}%
+}
+
+\NewDocumentCommand{\AtelierPlaceholderFigure}{m m}{%
+  \begin{figure}[tbp]
+    \centering
+    \begingroup
+      \setlength{\fboxsep}{0pt}%
+      \setlength{\fboxrule}{0.45pt}%
+      \fbox{\parbox[c][0.23\textheight][c]{0.88\linewidth}{\centering\color{AtelierInk}#1}}
+    \endgroup
+    \caption{#2}
+  \end{figure}
+}
+
+\endinput

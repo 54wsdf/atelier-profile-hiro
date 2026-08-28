@@ -1,0 +1,15 @@
+% Copyright 2026 54wsdf
+% SPDX-License-Identifier: LPPL-1.3c
+% This work has the LPPL maintenance status `maintained`.
+% The Current Maintainer of this work is 54wsdf.
+% This work consists of the files listed in manifest.txt.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{atelier/qa}[2026/08/17 v0.1.0 document QA helpers]
+
+\RequirePackage{ifdraft}
+\newcommand{\AtelierDraftOnly}[1]{\ifdraft{#1}{}}
+\newcommand{\AtelierNeedsVerification}[1]{%
+  \ifdraft{\textcolor{red!70!black}{[needs verification: #1]}}{}
+}
+
+\endinput

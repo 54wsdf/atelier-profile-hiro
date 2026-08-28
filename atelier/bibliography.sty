@@ -1,0 +1,68 @@
+% Copyright 2026 54wsdf
+% SPDX-License-Identifier: LPPL-1.3c
+% This work has the LPPL maintenance status `maintained`.
+% The Current Maintainer of this work is 54wsdf.
+% This work consists of the files listed in manifest.txt.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{atelier/bibliography}[2026/08/18 v0.3.2 AtelierTeX ACGN citation profile]
+
+\RequirePackage{xcolor}
+
+\providecommand{\AtelierActualGBStyle}{not-loaded}
+
+\NewDocumentCommand{\AtelierUseBibliography}{o}{%
+  \PassOptionsToPackage{backend=biber,style=numeric-comp,sorting=nyt}{biblatex}%
+  \IfValueT{#1}{\PassOptionsToPackage{#1}{biblatex}}%
+  \RequirePackage{biblatex}%
+}
+
+\newcommand{\AtelierMediaTag}[1]{%
+  \begingroup
+  \setlength{\fboxsep}{1.6pt}%
+  \colorbox{black!6}{\sffamily\scriptsize\strut #1}%
+  \endgroup
+}
+
+\newif\ifateliermediaindexenabled
+\ateliermediaindexenabledfalse
+
+\NewDocumentCommand{\AtelierEnableMediaIndex}{}{%
+  \ifateliermediaindexenabled\else
+    \DeclareFieldFormat{verba}{\AtelierMediaTag{##1}}%
+    \AtEveryBibitem{%
+      \iffieldundef{verba}{}{\printfield{verba}\hspace{0.55em}}%
+    }%
+    \ateliermediaindexenabledtrue
+  \fi
+}
+
+% Preferred public Chinese ACGN profile: GB/T 7714-2025 + ATX Media Index.
+% Older TeX distributions may ship biblatex-gb7714-2015 before the package added
+% gb7714-2025.bbx. They receive an explicit warning and a 2015 compatibility
+% render so the document remains buildable; release metadata can inspect
+% \AtelierActualGBStyle to record which formal style was actually used.
+\NewDocumentCommand{\AtelierUseACGNBibliography}{o}{%
+  \IfFileExists{gb7714-2025.bbx}{%
+    \renewcommand{\AtelierActualGBStyle}{gb7714-2025}%
+    \PassOptionsToPackage{backend=biber,style=gb7714-2025,gbtype=true,sorting=none,url=true,doi=true}{biblatex}%
+  }{%
+    \renewcommand{\AtelierActualGBStyle}{gb7714-2015-compat}%
+    \PackageWarningNoLine{atelier/bibliography}{%
+      gb7714-2025.bbx was not found. Using gb7714-2015 compatibility rendering.^^J%
+      Install/update biblatex-gb7714-2015 v1.1x or newer for GB/T 7714-2025 release output}%
+    \PassOptionsToPackage{backend=biber,style=gb7714-2015,gbtype=true,sorting=none,url=true,doi=true}{biblatex}%
+  }%
+  \IfValueT{#1}{\PassOptionsToPackage{#1}{biblatex}}%
+  \RequirePackage{biblatex}%
+  \AtelierEnableMediaIndex
+}
+
+\NewDocumentCommand{\AtelierUseACGNBibliographyLegacy}{o}{%
+  \renewcommand{\AtelierActualGBStyle}{gb7714-2015}%
+  \PassOptionsToPackage{backend=biber,style=gb7714-2015,gbtype=true,sorting=none,url=true,doi=true}{biblatex}%
+  \IfValueT{#1}{\PassOptionsToPackage{#1}{biblatex}}%
+  \RequirePackage{biblatex}%
+  \AtelierEnableMediaIndex
+}
+
+\endinput

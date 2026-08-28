@@ -1,0 +1,201 @@
+% Copyright 2026 54wsdf
+% SPDX-License-Identifier: LPPL-1.3c
+% This work has the LPPL maintenance status `maintained`.
+% The Current Maintainer of this work is 54wsdf.
+% This work consists of the files listed in manifest.txt.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{atelier/core}[2026/08/18 v0.4.0 core semantics and masthead]
+
+\RequirePackage{xparse}
+\RequirePackage{etoolbox}
+\RequirePackage{xcolor}
+\RequirePackage{graphicx}
+\RequirePackage{hyperref}
+\RequirePackage{enumitem}
+\RequirePackage{setspace}
+\RequirePackage{parskip}
+\RequirePackage{microtype}
+\RequirePackage{amsmath,amssymb}
+\RequirePackage{tikz}
+\RequirePackage{changepage}
+\RequirePackage{ragged2e}
+\RequirePackage{needspace}
+\RequirePackage{float}
+\RequirePackage{colortbl}
+\RequirePackage{multirow}
+\RequirePackage{afterpage}
+\RequirePackage{pdflscape}
+\RequirePackage{placeins}
+
+\definecolor{AtelierInk}{HTML}{202124}
+\definecolor{AtelierMuted}{HTML}{666B73}
+\definecolor{AtelierRule}{HTML}{C9CDD4}
+\definecolor{AtelierAccent}{HTML}{334E68}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=AtelierAccent,
+  citecolor=AtelierAccent,
+  urlcolor=AtelierAccent,
+  pdfcreator={AtelierTeX}
+}
+
+\setlist{nosep,leftmargin=2em}
+\setstretch{1.18}
+\color{AtelierInk}
+
+\providecommand{\AtelierSubtitle}{}
+\providecommand{\AtelierKicker}{}
+\providecommand{\AtelierVersion}{}
+\providecommand{\AtelierDate}{\today}
+\providecommand{\AtelierEnglishTitle}{}
+\providecommand{\AtelierAffiliation}{}
+\providecommand{\AtelierContact}{}
+\providecommand{\AtelierDocumentMeta}{}
+\providecommand{\AtelierAuthorNote}{}
+\providecommand{\AtelierPublicationName}{ATELIERTEX}
+\providecommand{\AtelierPublicationTheme}{ACGN / MULTILINGUAL / LONGFORM}
+\providecommand{\AtelierOrganizer}{ATELIERTEX PROJECT}
+% 防退化说明：默认刊头使用经过完整解码检查的 PNG；维护时必须同时检查图像
+% 完整性与实际页面显示，不能只依据扩展名或文件存在状态判断资产有效。
+\providecommand{\AtelierMastheadFile}{assets/ateliertex-masthead.png}
+\providecommand{\AtelierMastheadWidth}{0.94\textwidth}
+\providecommand{\AtelierSymposiumMastheadWidth}{39mm}
+
+\newif\ifAtelierMasthead
+\AtelierMastheadtrue
+
+\NewDocumentCommand{\subtitle}{m}{\renewcommand{\AtelierSubtitle}{#1}}
+\NewDocumentCommand{\kicker}{m}{\renewcommand{\AtelierKicker}{#1}}
+\NewDocumentCommand{\versionnote}{m}{\renewcommand{\AtelierVersion}{#1}}
+\NewDocumentCommand{\publicationdate}{m}{\renewcommand{\AtelierDate}{#1}}
+% 防退化说明：publication profile 应通过公共元数据槽复用 Atelier 标题页骨架；
+% 不能再复制并整体覆盖 \maketitle，否则只有图片和文字不同的首页会长期分叉。
+\NewDocumentCommand{\AtelierSetEnglishTitle}{m}{\renewcommand{\AtelierEnglishTitle}{#1}}
+\NewDocumentCommand{\AtelierSetAffiliation}{m}{\renewcommand{\AtelierAffiliation}{#1}}
+\NewDocumentCommand{\AtelierSetContact}{m}{\renewcommand{\AtelierContact}{#1}}
+\NewDocumentCommand{\AtelierSetDocumentMeta}{m}{\renewcommand{\AtelierDocumentMeta}{#1}}
+\NewDocumentCommand{\AtelierSetAuthorNote}{m}{\renewcommand{\AtelierAuthorNote}{#1}}
+\NewDocumentCommand{\AtelierSetPublicationName}{m}{\renewcommand{\AtelierPublicationName}{#1}}
+\NewDocumentCommand{\AtelierSetPublicationTheme}{m}{\renewcommand{\AtelierPublicationTheme}{#1}}
+\NewDocumentCommand{\AtelierSetOrganizer}{m}{\renewcommand{\AtelierOrganizer}{#1}}
+
+\NewDocumentCommand{\AtelierSetMasthead}{m}{\renewcommand{\AtelierMastheadFile}{#1}}
+\NewDocumentCommand{\AtelierSetMastheadWidth}{m}{\renewcommand{\AtelierMastheadWidth}{#1}}
+\NewDocumentCommand{\AtelierSetSymposiumMastheadWidth}{m}{\renewcommand{\AtelierSymposiumMastheadWidth}{#1}}
+\NewDocumentCommand{\AtelierHideMasthead}{}{\AtelierMastheadfalse}
+\NewDocumentCommand{\AtelierShowMasthead}{}{\AtelierMastheadtrue}
+
+\newcommand{\AtelierRenderMasthead}{%
+  \ifAtelierMasthead
+    \IfFileExists{\AtelierMastheadFile}{%
+      \begin{center}
+        \includegraphics[width=\AtelierMastheadWidth]{\AtelierMastheadFile}
+      \end{center}
+      \vspace{1.0em}%
+    }{}%
+  \fi
+}
+
+\newcommand{\AtelierMakeTitleFeature}{%
+  % 防退化说明：titlepage 会重置页码；关闭封面页锚点可避免正文第一页与封面
+  % 生成同名 page.1 目标，同时不改变作者看到的页码与标题页结构。
+  \hypersetup{pageanchor=false}%
+  \begin{titlepage}
+    \raggedright
+    \vspace*{0.035\textheight}
+    \AtelierRenderMasthead
+    {\small\bfseries\color{AtelierAccent}\MakeUppercase{\AtelierKicker}\par}
+    \vspace{1.1em}
+    {\huge\bfseries\@title\par}
+    \ifstrempty{\AtelierSubtitle}{}{\vspace{0.7em}{\Large\color{AtelierMuted}\AtelierSubtitle\par}}
+    \ifstrempty{\AtelierEnglishTitle}{}{\vspace{0.7em}{\large\itshape\color{AtelierMuted}\AtelierEnglishTitle\par}}
+    \vfill
+    {\large\@author\par}
+    \ifstrempty{\AtelierAffiliation}{}{\vspace{0.35em}{\color{AtelierMuted}\AtelierAffiliation\par}}
+    \ifstrempty{\AtelierContact}{}{\vspace{0.25em}{\small\color{AtelierMuted}\AtelierContact\par}}
+    \vspace{0.75em}
+    {\AtelierDate\par}
+    \ifstrempty{\AtelierDocumentMeta}{}{\vspace{0.35em}{\small\color{AtelierMuted}\AtelierDocumentMeta\par}}
+    \ifstrempty{\AtelierVersion}{}{\vspace{0.35em}{\small\color{AtelierMuted}\AtelierVersion\par}}
+    \ifstrempty{\AtelierAuthorNote}{}{\vspace{0.65em}{\footnotesize\color{AtelierMuted}\AtelierAuthorNote\par}}
+  \end{titlepage}
+  \hypersetup{pageanchor=true}%
+}
+
+% Symposium / 研讨会刊页：紧凑呈现 publication、题名、作者和稿件元数据，
+% 与 feature 的独立专题封面解决不同首页信息密度问题；两者都属于公共骨架。
+\newcommand{\AtelierRenderSymposiumMasthead}{%
+  \noindent
+  \begin{minipage}[c]{0.35\textwidth}
+    \raggedright
+    \ifAtelierMasthead
+      \IfFileExists{\AtelierMastheadFile}
+        {\includegraphics[width=\AtelierSymposiumMastheadWidth]{\AtelierMastheadFile}}
+        {\sffamily\bfseries\AtelierPublicationName}%
+    \fi
+  \end{minipage}\hfill
+  \begin{minipage}[c]{0.60\textwidth}
+    \raggedleft
+    {\sffamily\fontsize{7.6}{9.2}\selectfont\color{AtelierMuted}\AtelierPublicationName\par}
+    \vspace{1.1mm}
+    {\sffamily\fontsize{6.8}{8.5}\selectfont\color{AtelierMuted}\AtelierPublicationTheme\par}
+    \vspace{1mm}
+    {\sffamily\fontsize{6.8}{8.5}\selectfont\color{AtelierMuted}\AtelierDate\quad\textperiodcentered\quad\AtelierOrganizer\par}
+  \end{minipage}
+  \par\vspace{4.2mm}
+  \noindent{\color{AtelierRule}\rule{\textwidth}{0.38pt}}\par
+}
+
+\newcommand{\AtelierMakeTitleSymposium}{%
+  \thispagestyle{empty}%
+  \AtelierRenderSymposiumMasthead
+  \vspace{12.5mm}
+  \begingroup
+    \raggedright
+    {\sffamily\fontsize{7.3}{9}\selectfont\bfseries\color{AtelierMuted}\MakeUppercase{\AtelierKicker}\par}
+    \vspace{3.8mm}
+    {\bfseries\fontsize{27}{35}\selectfont\color{AtelierInk}\@title\par}
+    \ifstrempty{\AtelierSubtitle}{}{\vspace{4.2mm}{\fontsize{12.6}{19.2}\selectfont\color{AtelierInk}\AtelierSubtitle\par}}
+    \ifstrempty{\AtelierEnglishTitle}{}{\vspace{4mm}\begin{minipage}{0.88\textwidth}{\fontsize{9.7}{13.5}\selectfont\itshape\color{AtelierMuted}\AtelierEnglishTitle\par}\end{minipage}\par}
+    \vspace{8.5mm}
+    \noindent\begin{tabularx}{\textwidth}{@{}Xr@{}}
+      {\fontsize{10.1}{13.4}\selectfont\@author} & {\sffamily\fontsize{6.9}{8.6}\selectfont\color{AtelierMuted}\MakeUppercase{\AtelierDocumentMeta}}\\[-0.15em]
+      {\fontsize{8.8}{12.2}\selectfont\color{AtelierMuted}\AtelierAffiliation} & \\
+      {\fontsize{8.5}{11.6}\selectfont\color{AtelierMuted}\AtelierContact} &
+    \end{tabularx}\par
+    \ifstrempty{\AtelierAuthorNote}{}{\vspace{2mm}{\fontsize{7.8}{10.5}\selectfont\color{AtelierMuted}\AtelierAuthorNote\par}}
+  \endgroup
+  \vspace{8.5mm}
+}
+
+% 标题页排版注册表。新增平行排版只注册名字与 renderer；公开排版仍须另配
+% 独立样张和渲染验收，不能只注册一个没有可视证据的名字。
+\NewDocumentCommand{\AtelierDeclareTitleLayout}{mm}{\csdef{atelier@titlelayout@#1}{#2}}
+\NewDocumentCommand{\AtelierRenderTitleLayout}{m}{%
+  \ifcsdef{atelier@titlelayout@#1}
+    {\csuse{atelier@titlelayout@#1}}
+    {\PackageError{atelier/core}{Unknown title layout '#1'}{Register it with \string\AtelierDeclareTitleLayout\space before use.}}%
+}
+\newcommand{\AtelierTitleLayoutName}{feature}
+\NewDocumentCommand{\AtelierUseTitleLayout}{m}{%
+  \ifcsdef{atelier@titlelayout@#1}{%
+    \renewcommand{\AtelierTitleLayoutName}{#1}%
+    \renewcommand{\maketitle}{\AtelierRenderTitleLayout{#1}}%
+  }{%
+    \PackageError{atelier/core}{Unknown title layout '#1'}{Register it with \string\AtelierDeclareTitleLayout\space before use.}%
+  }%
+}
+\AtelierDeclareTitleLayout{feature}{\AtelierMakeTitleFeature}
+\AtelierDeclareTitleLayout{symposium}{\AtelierMakeTitleSymposium}
+
+% 保留显式调用名的既有语义：它继续表示 feature，不随 class option 漂移。
+\newcommand{\AtelierMakeTitle}{\AtelierMakeTitleFeature}
+\newcommand{\AtelierUseFeatureTitleLayout}{\AtelierUseTitleLayout{feature}}
+\newcommand{\AtelierUseSymposiumTitleLayout}{\AtelierUseTitleLayout{symposium}}
+
+\NewDocumentCommand{\AtelierLead}{m}{%
+  \par\noindent{\large\color{AtelierMuted}#1}\par\medskip
+}
+
+\endinput

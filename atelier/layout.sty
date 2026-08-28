@@ -1,0 +1,29 @@
+% Copyright 2026 54wsdf
+% SPDX-License-Identifier: LPPL-1.3c
+% This work has the LPPL maintenance status `maintained`.
+% The Current Maintainer of this work is 54wsdf.
+% This work consists of the files listed in manifest.txt.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{atelier/layout}[2026/08/17 v0.1.0 long-form layout]
+
+\RequirePackage[a4paper,top=27mm,bottom=27mm,left=28mm,right=28mm,headheight=15pt]{geometry}
+\RequirePackage{fancyhdr}
+\RequirePackage{titlesec}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small\nouppercase{\leftmark}}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\titleformat{\section}
+  {\AtelierDisplayFont\Large\bfseries\color{AtelierInk}}
+  {\thesection}{0.7em}{}
+\titleformat{\subsection}
+  {\AtelierDisplayFont\large\bfseries\color{AtelierInk}}
+  {\thesubsection}{0.7em}{}
+
+\titlespacing*{\section}{0pt}{2.8em}{1.0em}
+\titlespacing*{\subsection}{0pt}{2.0em}{0.7em}
+
+\endinput

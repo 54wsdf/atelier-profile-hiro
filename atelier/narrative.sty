@@ -1,0 +1,29 @@
+% Copyright 2026 54wsdf
+% SPDX-License-Identifier: LPPL-1.3c
+% This work has the LPPL maintenance status `maintained`.
+% The Current Maintainer of this work is 54wsdf.
+% This work consists of the files listed in manifest.txt.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{atelier/narrative}[2026/08/17 v0.1.0 narrative semantics]
+
+\RequirePackage[most]{tcolorbox}
+
+\NewDocumentEnvironment{AtelierInterlude}{m}
+  {\begin{tcolorbox}[enhanced,breakable,colback=black!2,colframe=AtelierRule,
+    boxrule=0.4pt,arc=0pt,left=1.2em,right=1.2em,top=1em,bottom=1em,
+    title={\textsc{Interlude}\quad #1},fonttitle=\bfseries]}
+  {\end{tcolorbox}}
+
+\NewDocumentEnvironment{AtelierDialogue}{}
+  {\begin{quote}\setlength{\parskip}{0.7em}}
+  {\end{quote}}
+
+\NewDocumentCommand{\AtelierSpeaker}{m}{\par\noindent\textbf{#1}\quad}
+
+\NewDocumentEnvironment{AtelierEpigraph}{m}
+  {\begin{flushright}\begin{minipage}{0.68\linewidth}\itshape}
+  {\par\raggedleft--- #1\end{minipage}\end{flushright}}
+
+\NewDocumentCommand{\AtelierSceneBreak}{}{\par\bigskip\centerline{\textcolor{AtelierMuted}{*\quad *\quad *}}\bigskip}
+
+\endinput
