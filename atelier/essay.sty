@@ -32,7 +32,7 @@
     \ifstrempty{\AtelierKicker}{}{{\sffamily\fontsize{7.2}{9}\selectfont\bfseries\color{AtelierMuted}\MakeUppercase{\AtelierKicker}\par}\vspace{3.5mm}}%
     {\bfseries\fontsize{27}{35}\selectfont\color{AtelierInk}\@title\par}%
     \ifstrempty{\AtelierSubtitle}{}{\vspace{3.8mm}{\fontsize{12.4}{18.8}\selectfont\color{AtelierInk}\AtelierSubtitle\par}}%
-    \ifstrempty{\AtelierEssayDeck}{}{%
+    \ifstrempty{\AtelierEssayDeck}{}{% 
       \vspace{5.5mm}%
       \begin{adjustwidth}{0mm}{11mm}%
         \fontsize{9.7}{15.5}\selectfont\color{AtelierMuted}\AtelierEssayDeck\par
@@ -44,7 +44,9 @@
       {\fontsize{8.5}{11.8}\selectfont\color{AtelierMuted}\AtelierAffiliation} & \\
     \end{tabularx}\par
     \ifstrempty{\AtelierAuthorNote}{}{\vspace{1.8mm}{\fontsize{7.8}{10.5}\selectfont\color{AtelierMuted}\AtelierAuthorNote\par}}%
-    \ifdefempty{\AtelierEssayHeroImage}{}{%
+    % 防退化说明：文件名槽必须检查宏展开后的值；\ifstrempty 会把空宏命令本身
+    % 误判为非空并尝试加载空路径，后续不得恢复该判断。
+    \ifdefempty{\AtelierEssayHeroImage}{}{% 
       \IfFileExists{\AtelierEssayHeroImage}{%
         \vspace{7mm}%
         \noindent\includegraphics[width=\AtelierEssayHeroWidth]{\AtelierEssayHeroImage}\par
