@@ -22,18 +22,30 @@ $oldTexInputs = $env:TEXINPUTS
 
 # v1.3 起 AtelierTeX 0.5.3 运行时直接随本仓库分发。普通使用者不得再被要求
 # 额外 clone ../AtelierTeX；测试也必须拒绝依赖兄弟仓才能通过的状态。
-$requiredRuntime = @(
-    'atelier.cls',
-    'atelier/core.sty',
-    'atelier/fonts.sty',
-    'atelier/bibliography.sty',
-    'profiles/editorial.sty',
-    'profiles/essay.sty'
-)
-foreach ($relativePath in $requiredRuntime) {
-    $runtimePath = Join-Path $repoRoot $relativePath
+$expectedRuntimeBlobs = [ordered]@{
+    'atelier.cls'              = '5f4c7f6d67617bd33f5a214e058d4fce4325ba92'
+    'atelier/bibliography.sty' = '9a4bbf7f8b06a72791b302d7a09b7bef24ba2eab'
+    'atelier/core.sty'         = '0e2adc84cd458868ec384d53ea07028c2288d01e'
+    'atelier/essay.sty'        = 'ede6be571cd6e039cacd941976e7e9faa360bc44'
+    'atelier/figures.sty'      = '9c8991282adb24950fb49c532a96a8d5364077e0'
+    'atelier/fonts.sty'        = '02bb53d96ff2d3c5ffb53b1aa2c2a14e25a71e17'
+    'atelier/languages.sty'    = 'fc6373047208b5c138ee9816f2ee3ceb9df6a9a4'
+    'atelier/layout.sty'       = 'ff084507f9bff5d0093095573386356f10300551'
+    'atelier/narrative.sty'    = '9a34e08fbfd53d924a420d369f0ca30f0a43d1a2'
+    'atelier/qa.sty'           = '3aca12d50735629c5768e5d9a0fa3cad4c380a9b'
+    'atelier/tables.sty'       = 'ead8e1ae74624b1ed5a92b965a047450596fd2bb'
+    'profiles/editorial.sty'   = 'dc4b75e58151bac8a649fd68a37cb7d0f2200314'
+    'profiles/essay.sty'       = '3ad015342b80abf04d4edb1e31958e9f865c0d36'
+}
+foreach ($entry in $expectedRuntimeBlobs.GetEnumerator()) {
+    $runtimePath = Join-Path $repoRoot $entry.Key
     if (-not (Test-Path -LiteralPath $runtimePath)) {
         throw "Bundled AtelierTeX runtime is missing: $runtimePath"
+    }
+    $actualBlob = (& git hash-object -- $runtimePath).Trim()
+    if ($LASTEXITCODE -ne 0) { throw "git hash-object failed: $($entry.Key)" }
+    if ($actualBlob -ne $entry.Value) {
+        throw "Bundled AtelierTeX runtime drifted from the locked 0.5.3 snapshot: $($entry.Key) expected $($entry.Value), got $actualBlob"
     }
 }
 
