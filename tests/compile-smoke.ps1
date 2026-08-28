@@ -45,8 +45,9 @@ if (-not (Test-Path $requiredMasthead)) {
 }
 
 # 只把当前仓库根目录放到 TEXINPUTS 前部，并保留 TeX 系统默认路径。
-# 这样即使开发机旁边恰好存在 AtelierTeX 仓库，也不会把它当作构建前提。
-$env:TEXINPUTS = '.;'
+# 使用平台原生路径分隔符，避免 Windows 的 ';' 在 Linux/macOS 上破坏 kpathsea。
+$pathSep = [IO.Path]::PathSeparator
+$env:TEXINPUTS = ".$pathSep$pathSep"
 Push-Location $repoRoot
 try {
     foreach ($selectedEngine in $engines) {
