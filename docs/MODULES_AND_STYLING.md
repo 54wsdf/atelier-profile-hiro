@@ -2,10 +2,24 @@
 
 本项目是维护者个人发起、面向篠泽广研讨会主题长文的第三方非官方排版支援工具，与 HIRO2026 官方及活动主办方无关。它在 AtelierTeX 的公共语义层上增加 HIRO2026 刊头、编辑型长文视觉与 ACGN 参考文献渲染。
 
+从 profile 1.3.0 起，HIRO2026 实际需要的 AtelierTeX 0.5.3 运行时已经直接随本仓库分发。架构仍然分层，但用户安装已经是单仓库。
+
 ## 1. 总体结构
 
 ```text
-AtelierTeX editorial profile
+atelier-profile-hiro/
+├── atelier.cls
+├── atelier/                 ← 内置 AtelierTeX 公共运行时
+├── profiles/                ← editorial / essay
+├── hiro2026.cls
+├── hiro/*.sty               ← HIRO publication layer
+└── author document
+```
+
+概念调用链：
+
+```text
+内置 AtelierTeX runtime
           ↓
       hiro2026.cls
           ↓
@@ -14,7 +28,7 @@ AtelierTeX editorial profile
     author document
 ```
 
-`hiro2026.cls` 是轻量入口，依次加载 AtelierTeX 与 `hiro/` 模块。
+`hiro2026.cls` 是轻量入口，先加载同仓库的 `atelier.cls`，再叠加 `hiro/` 模块。内置运行时的上游来源由 [`../DEPENDENCY_LOCK.md`](../DEPENDENCY_LOCK.md) 锁定。
 
 ## 2. Publication identity
 
@@ -37,7 +51,7 @@ AtelierTeX 维护 `feature`、`symposium`、`essay` 与标题页排版注册表�
 \documentclass[profile=essay,titlelayout=essay]{hiro2026}
 ```
 
-未来平行排版由 AtelierTeX 注册 renderer；HIRO 不复制公共标题页结构。
+未来平行排版仍由 AtelierTeX 公共注册机制维护；HIRO 不复制公共标题页结构。通用改动原则上应先回推 AtelierTeX 上游，再同步锁定运行时。
 
 模板的活动相关文字只用于排版识别，不代表官方身份、授权或合作关系。活动正式信息以活动页面为准。
 
@@ -64,7 +78,7 @@ AtelierTeX 维护 `feature`、`symposium`、`essay` 与标题页排版注册表�
 
 ## 4. Cross-media scholarly apparatus
 
-`hiro-bibliography.sty` 与 AtelierTeX bibliography layer 共同负责：
+`hiro-bibliography.sty` 与 `atelier/bibliography.sty` 共同负责：
 
 - GB/T 7714 正式著录；
 - GAME / CHARACTER FILE / COMM / ANIME / MANGA / MUSIC / LIVE 等 media tag；
@@ -72,26 +86,26 @@ AtelierTeX 维护 `feature`、`symposium`、`essay` 与标题页排版注册表�
 - bibliography legend；
 - 中日英混排书目。
 
-公共 taxonomy 与 bibliography semantics 由 AtelierTeX 维护；HIRO2026 处理活动主题下的 presentation。
+公共 taxonomy 与 bibliography semantics 由 AtelierTeX 上游维护；本仓库内置对应锁定运行时，HIRO2026 处理活动主题下的 presentation。
 
 ## 5. 视觉修改导航
 
 | 修改对象 | 文件 |
 | --- | --- |
-| 标题页骨架与排版注册表 | AtelierTeX `atelier/core.sty` |
-| 刊头、Logo 与题名元数据映射 | `hiro-core.sty` / `hiro-layout-editorial.sty` |
-| 页边距、章节、页眉页脚 | `hiro-core.sty` |
-| 字体别名 | `hiro-fonts.sty` |
-| 多语种兼容接口 | `hiro-languages.sty` |
-| 引文、幕间、场景、对白 | `hiro-narrative.sty` |
-| 图像与图注 | `hiro-figures.sty` |
-| 表格 | `hiro-tables.sty` |
-| 参考文献标签 renderer | `hiro-bibliography.sty` |
-| 公共字体、语言、ACGN bibliography semantics | AtelierTeX |
+| 标题页骨架与排版注册表 | `atelier/core.sty` |
+| 刊头、Logo 与题名元数据映射 | `hiro/hiro-core.sty` / `hiro/hiro-layout-editorial.sty` |
+| 页边距、章节、页眉页脚 | `hiro/hiro-core.sty` |
+| 字体别名 | `hiro/hiro-fonts.sty` |
+| 多语种兼容接口 | `hiro/hiro-languages.sty` |
+| 引文、幕间、场景、对白 | `hiro/hiro-narrative.sty` |
+| 图像与图注 | `hiro/hiro-figures.sty` |
+| 表格 | `hiro/hiro-tables.sty` |
+| 参考文献标签 renderer | `hiro/hiro-bibliography.sty` |
+| 公共字体、语言、ACGN bibliography semantics | `atelier/` |
 
 ## 6. 字体角色
 
-HIRO2026 消费 AtelierTeX 提供的字体角色：
+HIRO2026 消费内置 AtelierTeX 提供的字体角色：
 
 ```text
 SC serif
@@ -101,7 +115,7 @@ SC sans
 Latin serif / sans
 ```
 
-通用字体发现与 fallback 由 AtelierTeX 维护；HIRO2026 在具体组件中选择相应角色。
+通用字体发现与 fallback 由 `atelier/fonts.sty` 维护；HIRO2026 在具体组件中选择相应角色。
 
 ## 7. `Hiro*` 接口
 
@@ -139,7 +153,7 @@ HiroCoda
 - 用 `Needspace` 保护标题；
 - 长表使用可分页结构；
 - 控制整页幕间密度；
-- 固定依赖版本；
+- 固定内置运行时上游 commit；
 - 发布前进行关键页人工复核。
 
 模板仓库只维护可以交给其他作者直接使用的类文件、样式、文档与示例。具体论文正文与资料整理方式不属于模板接口。

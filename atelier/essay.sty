@@ -1,0 +1,72 @@
+% Copyright 2026 54wsdf
+% SPDX-License-Identifier: LPPL-1.3c
+% This work has the LPPL maintenance status `maintained`.
+% The Current Maintainer of this work is 54wsdf.
+% This work consists of the files listed in manifest.txt.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{atelier/essay}[2026/08/20 v0.5.0 restrained essay presentation]
+
+\providecommand{\AtelierEssayDeck}{}
+\providecommand{\AtelierEssayHeroImage}{}
+\providecommand{\AtelierEssayHeroCaption}{}
+\providecommand{\AtelierEssayHeroCredit}{}
+\providecommand{\AtelierEssayHeroWidth}{\textwidth}
+
+\NewDocumentCommand{\AtelierDeck}{m}{\renewcommand{\AtelierEssayDeck}{#1}}
+\NewDocumentCommand{\AtelierSetHeroImage}{m}{\renewcommand{\AtelierEssayHeroImage}{#1}}
+\NewDocumentCommand{\AtelierSetHeroCaption}{m}{\renewcommand{\AtelierEssayHeroCaption}{#1}}
+\NewDocumentCommand{\AtelierSetHeroCredit}{m}{\renewcommand{\AtelierEssayHeroCredit}{#1}}
+\NewDocumentCommand{\AtelierSetHeroWidth}{m}{\renewcommand{\AtelierEssayHeroWidth}{#1}}
+
+% 防退化说明：随笔刊页复用 symposium 的刊头语法和公共元数据，只增加 deck
+% 与可选头图；不得另起页面几何、章节或书目体系，否则平行排版会变成分叉模板。
+\newcommand{\AtelierMakeTitleEssay}{%
+  \thispagestyle{empty}%
+  % 防退化说明：紧接题名区后的叙事照片不能浮到首页顶部、越过刊头；必须在
+  % 当前页禁止 top float，照片从后续合法位置开始排布。
+  \suppressfloats[t]%
+  \AtelierRenderSymposiumMasthead
+  \vspace{10mm}%
+  \begingroup
+    \raggedright
+    \ifstrempty{\AtelierKicker}{}{{\sffamily\fontsize{7.2}{9}\selectfont\bfseries\color{AtelierMuted}\MakeUppercase{\AtelierKicker}\par}\vspace{3.5mm}}%
+    {\bfseries\fontsize{27}{35}\selectfont\color{AtelierInk}\@title\par}%
+    \ifstrempty{\AtelierSubtitle}{}{\vspace{3.8mm}{\fontsize{12.4}{18.8}\selectfont\color{AtelierInk}\AtelierSubtitle\par}}%
+    \ifstrempty{\AtelierEssayDeck}{}{% 
+      \vspace{5.5mm}%
+      \begin{adjustwidth}{0mm}{11mm}%
+        \fontsize{9.7}{15.5}\selectfont\color{AtelierMuted}\AtelierEssayDeck\par
+      \end{adjustwidth}%
+    }%
+    \vspace{6.5mm}%
+    \noindent\begin{tabularx}{\textwidth}{@{}Xr@{}}
+      {\fontsize{9.9}{13.2}\selectfont\@author} & {\sffamily\fontsize{6.8}{8.6}\selectfont\color{AtelierMuted}\MakeUppercase{\AtelierDocumentMeta}}\\[-0.1em]
+      {\fontsize{8.5}{11.8}\selectfont\color{AtelierMuted}\AtelierAffiliation} & \\
+    \end{tabularx}\par
+    \ifstrempty{\AtelierAuthorNote}{}{\vspace{1.8mm}{\fontsize{7.8}{10.5}\selectfont\color{AtelierMuted}\AtelierAuthorNote\par}}%
+    % 防退化说明：文件名槽必须检查宏展开后的值；\ifstrempty 会把空宏命令本身
+    % 误判为非空并尝试加载空路径，后续不得恢复该判断。
+    \ifdefempty{\AtelierEssayHeroImage}{}{% 
+      \IfFileExists{\AtelierEssayHeroImage}{%
+        \vspace{7mm}%
+        \noindent\includegraphics[width=\AtelierEssayHeroWidth]{\AtelierEssayHeroImage}\par
+        \ifstrempty{\AtelierEssayHeroCaption}{}{\vspace{2mm}{\fontsize{8.1}{11.4}\selectfont\color{AtelierInk}\AtelierEssayHeroCaption\par}}%
+        \ifstrempty{\AtelierEssayHeroCredit}{}{\vspace{0.5mm}{\sffamily\fontsize{6.7}{8.5}\selectfont\color{AtelierMuted}\AtelierEssayHeroCredit\par}}%
+      }{}%
+    }%
+    \vspace{7mm}%
+  \endgroup
+}
+
+\AtelierDeclareTitleLayout{essay}{\AtelierMakeTitleEssay}
+\newcommand{\AtelierUseEssayTitleLayout}{\AtelierUseTitleLayout{essay}}
+
+% 防退化说明：essay 只调整连续阅读密度；章节、引文、图表和书目语义继续来自
+% 公共模块，不能为了“随笔感”移除学术长文所需的稳定接口。
+\newcommand{\AtelierApplyEssayProfile}{%
+  \setstretch{1.20}%
+  \setlength{\parindent}{2em}%
+  \setlength{\parskip}{0pt}%
+}
+
+\endinput

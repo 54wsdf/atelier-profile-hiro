@@ -1,5 +1,13 @@
 # 版本变更记录
 
+## 1.3.0 — 2026-08-28
+
+- 将已验证的 AtelierTeX 0.5.3 运行时直接纳入 `atelier-profile-hiro`，普通使用者只需 clone 本仓库，不再需要额外下载或打开第二个 AtelierTeX 仓库。
+- 新增仓库内 `atelier.cls`、`atelier/` 与 `profiles/` 运行时文件；上游来源继续锁定到 `03abdc156992b6cdb84bdafff98a2457d55642da`，用于升级追踪而非运行时外部依赖。
+- `compile-smoke.ps1` 改为强制单仓库构建，并阻止缺少内置运行时或真实 HIRO2026 刊头资产时通过。
+- README、使用说明、依赖锁与测试文档统一改为单仓库安装方式。
+- 保留 GB/T 7714-2025 的 TeX 环境依赖说明：模板内置的是 AtelierTeX 选择与记录逻辑，具体 `gb7714-2025.bbx` 仍由 TeX 发行版提供。
+
 ## 1.2.3 — 2026-08-20
 
 - 将 AtelierTeX 依赖锁定升级到 0.5.3，使 LuaLaTeX 的简中标题、姓名角色与粗体使用同一字体链。

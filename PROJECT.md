@@ -24,14 +24,14 @@ HIRO2026 Logo 发布方已通过公开笔记说明可自由取用 Logo 进行使
 
 [AtelierTeX](https://github.com/54wsdf/AtelierTeX) 是面向 ACGN / 二次元 / 跨媒介人文研究的多语种长篇 LaTeX 基础框架。它维护可复用的字体、多语种、基础布局、叙事语义、图表语义与 ATX-ACGN-REF 跨媒介引用能力。
 
-`atelier-profile-hiro` 是 AtelierTeX 的下游排版扩展：
+概念上，`atelier-profile-hiro` 仍是 AtelierTeX 的下游 publication profile；分发方式从 1.3.0 起调整为 **单仓库自包含**。HIRO2026 实际需要的 AtelierTeX 0.5.3 运行时已经同步进入本仓库，普通作者无需额外下载第二个仓库。
 
 ```text
-AtelierTeX
-通用基础框架
-        ↓
+AtelierTeX 上游
+通用基础框架与长期维护
+        ↓  锁定 commit 同步运行时
 atelier-profile-hiro
-HIRO2026 非官方支援排版扩展
+内置 AtelierTeX runtime + HIRO2026 publication profile
         ↓
 作者自己的 HIRO2026 文稿
 ```
@@ -40,17 +40,19 @@ HIRO2026 非官方支援排版扩展
 
 | 层 | 职责 |
 | --- | --- |
-| AtelierTeX | 通用 ACGN 语义、字体、多语种、长文布局、图表、基础叙事、ATX-ACGN-REF |
+| AtelierTeX 上游 | 通用 ACGN 语义、字体、多语种、长文布局、图表、基础叙事、ATX-ACGN-REF 的长期维护 |
+| 本仓库内置 AtelierTeX runtime | 提供 HIRO2026 单仓库编译所需的稳定公共运行时 |
 | HIRO2026 扩展 | 活动主题刊头、标题页、章节视觉、HIRO 叙事环境与参考文献呈现 |
 | 作者文稿 | 正文、论证、图像、数据、引用条目和作者自己的研究材料 |
 
-可被多个项目复用的能力应优先进入 AtelierTeX；仅服务 HIRO2026 publication identity 或视觉呈现的功能保留在本仓库。
+可被多个项目复用的能力仍应优先回到 AtelierTeX 上游维护；仅服务 HIRO2026 publication identity 或视觉呈现的功能保留在 `hiro/`。本仓库中的 `atelier.cls`、`atelier/` 与 `profiles/` 是上游锁定快照，来源见 [`DEPENDENCY_LOCK.md`](DEPENDENCY_LOCK.md)。
 
 ## 仓库范围
 
 本仓库保存：
 
 - `hiro2026.cls` 与 HIRO 专用 `.sty`；
+- 单仓库编译所需的内置 AtelierTeX 运行时；
 - 可编译的公开 specimen 源文件；
 - 文档与测试脚本；
 - 可随模板分发的视觉资产；
@@ -64,11 +66,11 @@ HIRO2026 非官方支援排版扩展
 
 “THE IDOLM@STER”“学園アイドルマスター”“篠澤 広 / 篠泽广”等作品、角色、项目名称与相关商标归各自权利人所有。它们在本仓库中用于说明模板适用场景、提供主题示例与标识引用对象。
 
-模板源码、文档、示例与测试采用 LPPL-1.3c；视觉资产另按公开 Logo 使用与创作许可处理。完整分类见 [`LICENSE_SCOPE.md`](LICENSE_SCOPE.md)、[`manifest.txt`](manifest.txt)、[`LICENSE`](LICENSE) 与 [`assets/README.md`](assets/README.md)。
+模板源码、文档、示例、测试及内置 AtelierTeX 运行时采用 LPPL-1.3c；视觉资产另按公开 Logo 使用与创作许可处理。完整分类见 [`LICENSE_SCOPE.md`](LICENSE_SCOPE.md)、[`manifest.txt`](manifest.txt)、[`LICENSE`](LICENSE) 与 [`assets/README.md`](assets/README.md)。
 
 ## 维护者
 
 当前维护者：**54wsdf**
 
 - HIRO2026 profile：<https://github.com/54wsdf/atelier-profile-hiro>
-- AtelierTeX：<https://github.com/54wsdf/AtelierTeX>
+- AtelierTeX 上游：<https://github.com/54wsdf/AtelierTeX>

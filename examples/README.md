@@ -8,7 +8,7 @@
 
 `profile-demo.tex` 覆盖：
 
-- `hiro2026.cls` 与 AtelierTeX 依赖解析；
+- `hiro2026.cls` 与仓库内置 AtelierTeX 运行时解析；
 - HIRO2026 masthead 与第三方模板标识；
 - 标题页与 publication metadata；
 - 中文章节层级；
@@ -29,7 +29,9 @@
 
 ## 与 AtelierTeX 的关系
 
-示例通过 `hiro2026.cls` 加载 [AtelierTeX](https://github.com/54wsdf/AtelierTeX)。AtelierTeX 负责通用的字体、多语种、基础长文语义与 ATX-ACGN-REF；本仓库在其上增加 HIRO2026 的 publication presentation。
+示例通过 `hiro2026.cls` 加载本仓库中的 `atelier.cls`、`atelier/` 与 `profiles/`。这些文件来自 [`DEPENDENCY_LOCK.md`](../DEPENDENCY_LOCK.md) 锁定的 AtelierTeX 0.5.3 上游快照。AtelierTeX 负责通用的字体、多语种、基础长文语义与 ATX-ACGN-REF；HIRO 模块在其上增加 publication presentation。
+
+普通作者和示例编译都不需要额外 clone AtelierTeX 仓库。
 
 ## 编译
 
@@ -37,4 +39,4 @@
 pwsh -File tests/compile-smoke.ps1 -Engine both
 ```
 
-脚本会清理旧输出、设置相邻 AtelierTeX 搜索路径，并对三种排版进行双引擎编译。修改 `hiro2026.cls`、`hiro/*.sty` 或 bibliography renderer 后，建议优先运行这些 specimen。
+脚本会清理旧输出，并只使用当前仓库内的运行时对三种排版进行双引擎编译。修改 `hiro2026.cls`、`hiro/*.sty`、内置 `atelier/` 或 bibliography renderer 后，建议优先运行这些 specimen。

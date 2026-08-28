@@ -1,11 +1,11 @@
 cff-version: 1.2.0
-message: "If you use this unofficial HIRO2026 publication profile, please cite this repository and AtelierTeX."
+message: "If you use this unofficial HIRO2026 publication profile, please cite this repository. The bundled runtime is derived from AtelierTeX at the commit recorded in DEPENDENCY_LOCK.md."
 title: "atelier-profile-hiro"
 type: software
 authors:
   - name: "54wsdf"
-version: "1.2.3"
-date-released: "2026-08-20"
+version: "1.3.0"
+date-released: "2026-08-28"
 repository-code: "https://github.com/54wsdf/atelier-profile-hiro"
 url: "https://github.com/54wsdf/atelier-profile-hiro"
 license: "LPPL-1.3c"
@@ -23,5 +23,6 @@ abstract: >-
   atelier-profile-hiro is an independently maintained, unofficial third-party
   LaTeX publication profile for writing about HIRO2026 and Shinosawa Hiro. It
   provides three parallel title layouts, editorial and essay reading profiles,
-  narrative blocks and cross-media bibliography rendering on top of AtelierTeX.
+  narrative blocks and cross-media bibliography rendering, and bundles the
+  locked AtelierTeX 0.5.3 runtime required for single-repository compilation.
   The project is not affiliated with or operated by the event organizers.

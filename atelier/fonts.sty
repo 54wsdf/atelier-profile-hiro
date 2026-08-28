@@ -1,0 +1,204 @@
+% Copyright 2026 54wsdf
+% SPDX-License-Identifier: LPPL-1.3c
+% This work has the LPPL maintenance status `maintained`.
+% The Current Maintainer of this work is 54wsdf.
+% This work consists of the files listed in manifest.txt.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{atelier/fonts}[2026/08/20 v0.1.8 portable font roles]
+
+\RequirePackage{iftex}
+\ifPDFTeX
+  \PackageError{atelier/fonts}{AtelierTeX requires XeLaTeX or LuaLaTeX}{Use xelatex or lualatex.}
+\fi
+
+\ifLuaTeX
+  \RequirePackage[UTF8,scheme=plain,fontset=fandol]{ctex}
+\else
+  \RequirePackage[UTF8,scheme=plain,fontset=none]{ctex}
+\fi
+\RequirePackage{fontspec}
+\RequirePackage{newunicodechar}
+\defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+
+% Prefer families that are reliably available as embeddable OpenType/TrueType
+% faces across TeX/Linux/Windows environments. EB Garamond remains available at
+% the end of the automatic chain because some Linux installations expose an
+% additional WOFF face that XeTeX can discover but xdvipdfmx cannot embed.
+\IfFontExistsTF{Libertinus Serif}
+  {\setmainfont{Libertinus Serif}}
+  {\IfFontExistsTF{Noto Serif}
+    {\setmainfont{Noto Serif}}
+    {\IfFontExistsTF{DejaVu Serif}
+      {\setmainfont{DejaVu Serif}}
+      {\IfFontExistsTF{EB Garamond}
+        {\setmainfont{EB Garamond}}
+        {\setmainfont{Latin Modern Roman}}}}}
+
+\IfFontExistsTF{Libertinus Sans}
+  {\setsansfont{Libertinus Sans}}
+  {\IfFontExistsTF{Noto Sans}
+    {\setsansfont{Noto Sans}}
+    {\setsansfont{DejaVu Sans}}}
+
+\ifLuaTeX
+  \IfFontExistsTF{DejaVu Sans Mono}
+    {\setmonofont{DejaVu Sans Mono}}
+    {\setmonofont{Latin Modern Mono}}
+\else
+  \IfFontExistsTF{Iosevka Term}
+    {\setmonofont{Iosevka Term}}
+    {\IfFontExistsTF{DejaVu Sans Mono}
+      {\setmonofont{DejaVu Sans Mono}}
+      {\setmonofont{Latin Modern Mono}}}
+\fi
+
+\newcommand{\AtelierDisplayFont}{\sffamily}
+
+\ifXeTeX
+  \RequirePackage{xeCJK}
+  \IfFontExistsTF{Noto Serif CJK SC}{%
+    \setCJKmainfont{Noto Serif CJK SC}[BoldFont=Noto Serif CJK SC Bold]
+    \newCJKfontfamily\AtelierSCFamily{Noto Serif CJK SC}[BoldFont=Noto Serif CJK SC Bold]
+  }{\IfFontExistsTF{SimSun}{%
+    \setCJKmainfont{SimSun}[AutoFakeBold=2,AutoFakeSlant=0.18]
+    \IfFontExistsTF{Noto Serif CJK JP}
+      {\setCJKfallbackfamilyfont{\CJKrmdefault}{Noto Serif CJK JP}}
+      {\IfFontExistsTF{HaranoAjiMincho-Regular.otf}
+        {\setCJKfallbackfamilyfont{\CJKrmdefault}{HaranoAjiMincho-Regular.otf}}
+        {\IfFontExistsTF{Microsoft YaHei}{\setCJKfallbackfamilyfont{\CJKrmdefault}{Microsoft YaHei}}{}}}
+    \newCJKfontfamily\AtelierSCFamily{SimSun}[AutoFakeBold=2,AutoFakeSlant=0.18]
+  }{%
+    \setCJKmainfont{FandolSong-Regular.otf}[BoldFont=FandolHei-Regular.otf]
+    \setCJKfallbackfamilyfont{\CJKrmdefault}{HaranoAjiMincho-Regular.otf}
+    \newCJKfontfamily\AtelierSCFamily{FandolSong-Regular.otf}[BoldFont=FandolHei-Regular.otf]
+  }}
+  \IfFontExistsTF{Noto Serif CJK TC}
+    {\newCJKfontfamily\AtelierTCFamily{Noto Serif CJK TC}}
+    {\IfFontExistsTF{SimSun}
+      {\newCJKfontfamily\AtelierTCFamily{SimSun}}
+      {\newCJKfontfamily\AtelierTCFamily{HaranoAjiMincho-Regular.otf}[BoldFont=HaranoAjiMincho-Bold.otf]}}
+  \IfFontExistsTF{Noto Serif CJK JP}
+    {\newCJKfontfamily\AtelierJPFamily{Noto Serif CJK JP}}
+    {\IfFontExistsTF{HaranoAjiMincho-Regular.otf}
+      {\newCJKfontfamily\AtelierJPFamily{HaranoAjiMincho-Regular.otf}[BoldFont=HaranoAjiMincho-Bold.otf]}
+      {\IfFontExistsTF{Microsoft YaHei}
+        {\newCJKfontfamily\AtelierJPFamily{Microsoft YaHei}}
+        {\newCJKfontfamily\AtelierJPFamily{FandolSong-Regular.otf}}}}
+  \IfFontExistsTF{Noto Sans CJK SC}{%
+    \setCJKsansfont{Noto Sans CJK SC}[BoldFont=Noto Sans CJK SC Bold]
+    \newCJKfontfamily\AtelierSCSans{Noto Sans CJK SC}[BoldFont=Noto Sans CJK SC Bold]
+  }{\IfFontExistsTF{Microsoft YaHei}{%
+    \setCJKsansfont{Microsoft YaHei}[AutoFakeBold=2]
+    \newCJKfontfamily\AtelierSCSans{Microsoft YaHei}[AutoFakeBold=2]
+  }{%
+    \setCJKsansfont{HaranoAjiGothic-Regular.otf}[BoldFont=HaranoAjiGothic-Medium.otf]
+    \newCJKfontfamily\AtelierSCSans{HaranoAjiGothic-Regular.otf}[BoldFont=HaranoAjiGothic-Medium.otf]
+  }}
+  \IfFontExistsTF{Microsoft YaHei}
+    {\setCJKmonofont{Microsoft YaHei}}
+    {\setCJKmonofont{FandolFang-Regular.otf}}
+  \let\AtelierSCGlyphFamily\AtelierSCFamily
+  \XeTeXlinebreaklocale "zh"
+  \XeTeXlinebreakskip=0pt plus 1pt
+\else\ifLuaTeX
+  % 防退化说明：LuaLaTeX 的日文字体角色必须显式声明粗体，否则标题或粗体书目
+  % 会退回常规字重并产生字体替代警告。
+  \newCJKfontfamily\AtelierJPFamily{HaranoAjiMincho-Regular.otf}[BoldFont=HaranoAjiMincho-Bold.otf]
+  % 防退化说明：LuaLaTeX 默认 FandolSong 不含部分简中姓名字形。简中稀有字
+  % 必须优先使用真实简中字体，并让正文主字体、姓名角色及其粗体共享同一家族；
+  % 后续不能只给姓名宏换字体，否则姓名后的标题文字会再次形成可见的混排。
+  \IfFontExistsTF{Noto Serif SC}{%
+    \setCJKmainfont{Noto Serif SC}[
+      BoldFont={Noto Serif SC},
+      BoldFeatures={Weight=700},
+      AutoFakeSlant=0.18
+    ]
+    \newCJKfontfamily\AtelierSCFamily{Noto Serif SC}[
+      BoldFont={Noto Serif SC},
+      BoldFeatures={Weight=700},
+      AutoFakeSlant=0.18
+    ]
+    \let\AtelierSCGlyphFamily\AtelierSCFamily
+  }{\IfFontExistsTF{LXGW Neo ZhiSong}{%
+    \setCJKmainfont{LXGW Neo ZhiSong}[AutoFakeBold=2,AutoFakeSlant=0.18]
+    \newCJKfontfamily\AtelierSCFamily{LXGW Neo ZhiSong}[AutoFakeBold=2,AutoFakeSlant=0.18]
+    \let\AtelierSCGlyphFamily\AtelierSCFamily
+  }{%
+    \setCJKmainfont{HaranoAjiMincho-Regular.otf}[
+      BoldFont=HaranoAjiMincho-Bold.otf,
+      AutoFakeSlant=0.18
+    ]
+    \let\AtelierSCFamily\AtelierJPFamily
+    \let\AtelierSCGlyphFamily\AtelierJPFamily
+  }}
+  \newcommand{\AtelierTCFamily}{\rmfamily}
+  \newcommand{\AtelierSCSans}{\sffamily}
+\fi\fi
+
+\newcommand{\CJKsffamily}{\AtelierSCSans\sffamily}
+\newcommand{\AtelierSCText}[1]{{\AtelierSCFamily #1}}
+\newcommand{\AtelierTCText}[1]{{\AtelierTCFamily #1}}
+\newcommand{\AtelierJPText}[1]{{\AtelierJPFamily #1}}
+\newcommand{\AtelierENText}[1]{{\rmfamily #1}}
+
+% 防退化说明：逐字符日文 fallback 会优先于外层简中字体角色；同一 Unicode
+% 汉字同时用于简中姓名与日文原名时，不能再用缩放或局部假粗体掩盖混排。
+% 这些接口直接从指定 CJK 角色取字形，使下游可以按内容语种保持整串字体一致。
+\NewDocumentCommand{\AtelierSCGlyph}{m}{{\AtelierSCGlyphFamily\char"#1\relax}}
+\NewDocumentCommand{\AtelierTCGlyph}{m}{{\AtelierTCFamily\char"#1\relax}}
+\NewDocumentCommand{\AtelierJPGlyph}{m}{{\AtelierJPFamily\char"#1\relax}}
+
+\NewDocumentCommand{\AtelierDeclareJPCharFallback}{m m}{%
+  \newunicodechar{#1}{{\AtelierJPFamily\char"#2\relax}}%
+}
+
+\AtelierDeclareJPCharFallback{・}{30FB}
+\AtelierDeclareJPCharFallback{々}{3005}
+\AtelierDeclareJPCharFallback{〆}{3006}
+\AtelierDeclareJPCharFallback{〇}{3007}
+\AtelierDeclareJPCharFallback{〜}{301C}
+\AtelierDeclareJPCharFallback{ー}{30FC}
+\AtelierDeclareJPCharFallback{ヵ}{30F5}
+\AtelierDeclareJPCharFallback{ヶ}{30F6}
+\AtelierDeclareJPCharFallback{広}{5E83}
+\AtelierDeclareJPCharFallback{廣}{5EE3}
+\AtelierDeclareJPCharFallback{澤}{6FA4}
+\AtelierDeclareJPCharFallback{篠}{7BE0}
+\AtelierDeclareJPCharFallback{髙}{9AD9}
+\AtelierDeclareJPCharFallback{﨑}{FA11}
+\AtelierDeclareJPCharFallback{邊}{908A}
+\AtelierDeclareJPCharFallback{邉}{9089}
+\AtelierDeclareJPCharFallback{瀨}{7028}
+\AtelierDeclareJPCharFallback{瀬}{702C}
+\AtelierDeclareJPCharFallback{凛}{51DB}
+\AtelierDeclareJPCharFallback{凜}{51DC}
+\AtelierDeclareJPCharFallback{児}{5150}
+\AtelierDeclareJPCharFallback{囲}{56F2}
+\AtelierDeclareJPCharFallback{売}{58F2}
+\AtelierDeclareJPCharFallback{対}{5BFE}
+\AtelierDeclareJPCharFallback{応}{5FDC}
+\AtelierDeclareJPCharFallback{戦}{6226}
+\AtelierDeclareJPCharFallback{気}{6C17}
+\AtelierDeclareJPCharFallback{決}{6C7A}
+\AtelierDeclareJPCharFallback{発}{767A}
+\AtelierDeclareJPCharFallback{読}{8AAD}
+\AtelierDeclareJPCharFallback{豊}{8C4A}
+% 防退化说明：下列字形会出现在日文出版机构、作者名和作品名中，而 LuaLaTeX
+% 默认 Fandol 中文字体并不完整覆盖；必须显式转入日文字体，避免书目静默缺字。
+\AtelierDeclareJPCharFallback{製}{88FD}
+\AtelierDeclareJPCharFallback{涼}{6DBC}
+\AtelierDeclareJPCharFallback{宮}{5BAE}
+\AtelierDeclareJPCharFallback{続}{7D9A}
+\AtelierDeclareJPCharFallback{扱}{6271}
+\AtelierDeclareJPCharFallback{闘}{95D8}
+\AtelierDeclareJPCharFallback{雰}{96F0}
+\AtelierDeclareJPCharFallback{辻}{8FBB}
+\AtelierDeclareJPCharFallback{榊}{698A}
+\AtelierDeclareJPCharFallback{楽}{697D}
+\AtelierDeclareJPCharFallback{抜}{629C}
+\AtelierDeclareJPCharFallback{験}{9A13}
+\AtelierDeclareJPCharFallback{神}{FA19}
+\AtelierDeclareJPCharFallback{福}{FA1B}
+\AtelierDeclareJPCharFallback{塚}{FA10}
+
+\endinput

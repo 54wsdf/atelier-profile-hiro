@@ -27,8 +27,8 @@ $previews = @(
     }
 )
 
-# 防退化说明：README 预览必须由当前 hiro2026.cls 与相邻 AtelierTeX 编译生成，
-# 以保证刊头、字体、书目和模块与仓库源码一致。
+# 防退化说明：README 预览必须只用当前仓库内的 hiro2026.cls、内置 AtelierTeX
+# 运行时和真实 HIRO2026 资产编译生成，不能依赖兄弟仓或开发机上的外部源码。
 & pwsh (Join-Path $PSScriptRoot 'compile-smoke.ps1') -Engine $Engine
 if ($LASTEXITCODE -ne 0) { throw "HIRO2026 specimen build failed: $Engine" }
 foreach ($item in $previews) {
@@ -79,7 +79,8 @@ finally {
 Add-Type -AssemblyName System.Drawing
 foreach ($item in $previews) {
     $preview = Join-Path $repoRoot "$($item.PreviewRelative).png"
-    if (-not (Test-Path $preview)) { throw "Preview was not produced: $preview" }
+    if (-not (Test-Path $preview)) { throw "Preview was not produced: $preview"
+    }
     $bytes = [System.IO.File]::ReadAllBytes($preview)
     if ($bytes.Length -lt 50000 -or $bytes.Length -lt 26 -or $bytes[25] -ne 2) {
         throw "Preview PNG is too small, truncated, or not opaque RGB: $preview"
