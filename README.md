@@ -4,11 +4,11 @@
   <img src="assets/hiro2026-logo.png" alt="HIRO2026" width="560">
 </p>
 
-> **由维护者个人发起、面向篠泽广研讨会（HIRO2026）的第三方非官方 LaTeX 支援项目，基于 [AtelierTeX](https://github.com/54wsdf/AtelierTeX)。**
+> **由维护者个人发起、面向篠泽广研讨会（HIRO2026）的第三方非官方 LaTeX 支援项目。当前发行版已内置经过锁定验证的 AtelierTeX 0.5.3 运行时，普通使用者只需下载本仓库。**
 
 <p align="center">
   <strong><a href="https://idol-master.top/sites/hiro2026">HIRO2026 活动 / 研讨会页面</a></strong>
-  · <a href="https://github.com/54wsdf/AtelierTeX">AtelierTeX</a>
+  · <a href="https://github.com/54wsdf/AtelierTeX">AtelierTeX 上游项目</a>
   · <a href="examples/profile-demo.tex">示例源码</a>
 </p>
 
@@ -18,15 +18,26 @@
 
 ## 项目定位
 
-这个仓库是基于 AtelierTeX 制作的活动主题排版扩展：
+这个仓库是基于 AtelierTeX 制作的活动主题排版扩展。为了让它可以作为真正的单仓库模板直接交给其他作者，从 1.3.0 起，HIRO2026 所需的 AtelierTeX 运行时已经直接随本仓库分发：
 
 ```text
-AtelierTeX
-通用 ACGN / 跨媒介长文基础框架
+atelier-profile-hiro
+├── atelier.cls            # 内置 AtelierTeX 0.5.3 类入口
+├── atelier/               # 内置通用排版、字体、语言、书目等运行时
+├── profiles/              # HIRO 实际使用的 editorial / essay profile
+├── hiro2026.cls           # HIRO2026 publication class
+├── hiro/                  # HIRO2026 publication modules
+├── assets/                # HIRO2026 Logo / Mark
+└── examples/              # 可直接编译样张
+```
+
+概念上的分层仍保持不变：
+
+```text
+AtelierTeX 公共语义
 字体 · 多语种 · 基础布局 · 叙事语义 · ATX-ACGN-REF
         ↓
 atelier-profile-hiro
-面向 HIRO2026 的非官方支援排版扩展
 刊头 · 标题页 · 章节视觉 · HIRO 叙事环境 · 会议主题书目呈现
         ↓
 使用者的 HIRO2026 文稿
@@ -35,15 +46,11 @@ atelier-profile-hiro
 
 | 层级 | 负责内容 |
 | --- | --- |
-| [AtelierTeX](https://github.com/54wsdf/AtelierTeX) | 面向 ACGN / 二次元 / 跨媒介人文研究的多语种长篇 LaTeX 基础框架；提供字体、语言、基础语义、通用排版能力与 ATX-ACGN-REF |
-| `atelier-profile-hiro` | 将上述公共能力用于 HIRO2026 主题写作，提供 `hiro2026.cls`、活动主题刊头、标题页、叙事块与参考文献呈现 |
+| 内置 AtelierTeX 运行时 | 多语种长篇 LaTeX 基础框架；字体、语言、基础语义、通用排版能力与 ATX-ACGN-REF |
+| `atelier-profile-hiro` | HIRO2026 publication identity、刊头、标题页、叙事块与参考文献呈现 |
 | 使用者文稿 | 使用模板完成文章；正文和研究材料由使用者自行管理 |
 
-通用能力优先进入 AtelierTeX；HIRO2026 的 publication identity、活动主题视觉与专用呈现保留在本仓库。完整边界见 [`PROJECT.md`](PROJECT.md)。
-
-## 为什么为 HIRO2026 单独做一个 profile
-
-围绕 ACGN 作品写长文时，材料经常同时来自角色官网、游戏本体、剧情话数、卡面、PV、歌曲、Live、访谈、动画单集、漫画章节与玩家整理页。HIRO2026 profile 在 AtelierTeX 的公共能力之上，进一步处理中文长文与日文原文的混排、标题页与章节节奏、剧情和对白的叙事环境，以及 GAME / COMM / ANIME / MANGA / MUSIC / LIVE 等对象的 media tag 与 locator。
+上游 AtelierTeX 仍独立维护；本仓库内置的是明确 commit 的运行时快照。来源和升级规则见 [`DEPENDENCY_LOCK.md`](DEPENDENCY_LOCK.md)。普通作者不需要再 clone 第二个仓库。
 
 ## 三种平行标题页排版
 
@@ -73,7 +80,7 @@ atelier-profile-hiro
   <img src="docs/assets/rendered/hiro2026-essay-page1.png" alt="HIRO2026 Essay title layout" width="900">
 </p>
 
-`symposium` 使用图形刊头、右侧活动信息与紧凑题名层级；`essay` 增加 deck 与叙事照片接口，并继续使用相同的章节、图表和书目体系。`titlelayout=v08` 作为 `symposium` 的兼容名称持续可用，也是一个可主动选择的排版入口。
+`symposium` 使用图形刊头、右侧活动信息与紧凑题名层级；`essay` 增加 deck 与叙事照片接口，并继续使用相同的章节、图表和书目体系。`titlelayout=v08` 作为 `symposium` 的兼容名称持续可用。
 
 默认图形刊头位可以替换为经过确认可分发的宣传图或其他 publication masthead：
 
@@ -82,15 +89,14 @@ atelier-profile-hiro
 \HIROSetMastheadImageWidth{39mm}
 ```
 
-## 快速开始
+## 快速开始：只下载一个仓库
 
-推荐把 AtelierTeX 与本仓库放在同一工作目录：
-
-```text
-workspace/
-├── AtelierTeX/
-└── atelier-profile-hiro/
+```bash
+git clone https://github.com/54wsdf/atelier-profile-hiro.git
+cd atelier-profile-hiro
 ```
+
+不需要 `git clone 54wsdf/AtelierTeX`，也不需要把两个仓库摆成兄弟目录。
 
 最小文档：
 
@@ -128,7 +134,7 @@ workspace/
 \HIRODeck{一句承担阅读入口、而非摘要功能的导语。}
 ```
 
-完整用法见 [`docs/USER_GUIDE.md`](docs/USER_GUIDE.md)。三种入口分别为 [`examples/profile-demo.tex`](examples/profile-demo.tex)、[`examples/profile-demo-symposium.tex`](examples/profile-demo-symposium.tex) 与 [`examples/profile-demo-essay.tex`](examples/profile-demo-essay.tex)。
+完整用法见 [`docs/USER_GUIDE.md`](docs/USER_GUIDE.md)。
 
 ## PDF 与 README 图像渲染
 
@@ -141,7 +147,7 @@ pwsh -File tests/render-readme-preview.ps1 -Engine xelatex
 脚本执行：
 
 ```text
-hiro2026.cls + AtelierTeX
+当前仓库内置 AtelierTeX 运行时 + hiro2026.cls + HIRO2026 真实资产
         ↓
 profile-demo.tex                  → feature PDF
 profile-demo-symposium.tex       → symposium PDF
@@ -154,13 +160,11 @@ hiro2026-symposium-page1.png
 hiro2026-essay-page1.png
 ```
 
-渲染脚本分别编译三份示例 PDF，再生成相应 PNG，并检查 A4 像素尺寸、RGB 色彩类型和图像完整性。详细说明见 [`docs/assets/rendered/README.md`](docs/assets/rendered/README.md)。
-
-当前公开样张把第一页完整留给刊头、题名、作者、摘要和关键词；多语种与叙事环境示例从第二页开始。
+测试会确认 `assets/hiro2026-logo.png` 实际进入构建日志，避免缺图时的文字 fallback 被误当成正式渲染。
 
 ## 跨媒介参考文献
 
-模板通过 AtelierTeX 使用 ATX-ACGN-REF，在 GB/T 7714 正式条目前显示短 media tag。示例采用《学园偶像大师》与篠泽广相关的公开官方资料，直接演示 HIRO2026 主题下常见的引用对象。
+模板通过内置 AtelierTeX 使用 ATX-ACGN-REF，在 GB/T 7714 正式条目前显示短 media tag。正式目标基线为 GB/T 7714-2025，实际加载样式可由 `\AtelierActualGBStyle` 查询。
 
 ```bibtex
 @software{gakumas_game,
@@ -180,7 +184,7 @@ hiro2026-essay-page1.png
 \printbibliography
 ```
 
-详细规范见 [`docs/BIBLIOGRAPHY.md`](docs/BIBLIOGRAPHY.md)。公共 ACGN 引用规范与完整对象目录由 [AtelierTeX / ATX-ACGN-REF](https://github.com/54wsdf/AtelierTeX) 维护。
+详细规范见 [`docs/BIBLIOGRAPHY.md`](docs/BIBLIOGRAPHY.md)。公共 ACGN 引用规范的上游版本由 AtelierTeX 维护，本仓库发布时固定同步到 [`DEPENDENCY_LOCK.md`](DEPENDENCY_LOCK.md) 所列 commit。
 
 ## 编译与测试
 
@@ -195,25 +199,28 @@ pwsh -File tests/compile-smoke.ps1 -Engine both
 pwsh -File tests/render-readme-preview.ps1 -Engine xelatex
 ```
 
-精确 AtelierTeX 依赖版本见 [`DEPENDENCY_LOCK.md`](DEPENDENCY_LOCK.md)。
+`compile-smoke.ps1` 明确检查本仓库中的 `atelier.cls`、`atelier/` 与 `profiles/`，不再寻找 `../AtelierTeX`。
 
 ## 仓库结构
 
 ```text
 atelier-profile-hiro/
-├── hiro2026.cls               # 文档类入口
-├── hiro/                      # HIRO2026 publication modules
-├── assets/                    # Logo / Mark 与可替换刊头资产
-├── examples/                  # 可编译公开样张
-├── docs/                      # 使用、模块、书目与渲染说明
-├── tests/                     # 编译和 README 渲染脚本
-├── PROJECT.md                 # 项目定位与第三方边界
-├── CONTRIBUTING.md            # 公开贡献与验证说明
-├── CITATION.cff               # GitHub 引用元数据
-├── LICENSE                    # LPPL-1.3c 正文
-├── LICENSE_SCOPE.md           # 源码、视觉资产与商标边界
-├── LICENSES/                  # Logo 公开许可记录
-├── manifest.txt               # LPPL Work 逐文件清单
+├── atelier.cls               # 内置 AtelierTeX 0.5.3 运行时入口
+├── atelier/                  # 内置 AtelierTeX 公共运行时模块
+├── profiles/                 # 内置 editorial / essay profile
+├── hiro2026.cls              # HIRO2026 文档类入口
+├── hiro/                     # HIRO2026 publication modules
+├── assets/                   # Logo / Mark 与可替换刊头资产
+├── examples/                 # 可编译公开样张
+├── docs/                     # 使用、模块、书目与渲染说明
+├── tests/                    # 编译和 README 渲染脚本
+├── PROJECT.md
+├── CONTRIBUTING.md
+├── CITATION.cff
+├── LICENSE
+├── LICENSE_SCOPE.md
+├── LICENSES/
+├── manifest.txt
 ├── DEPENDENCY_LOCK.md
 └── CHANGELOG.md
 ```
@@ -226,12 +233,13 @@ atelier-profile-hiro/
 
 ## 文档索引
 
-- [`PROJECT.md`](PROJECT.md)：项目定位、第三方状态与 AtelierTeX 分工；
+- [`DEPENDENCY_LOCK.md`](DEPENDENCY_LOCK.md)：内置 AtelierTeX 来源、版本与升级规则；
+- [`PROJECT.md`](PROJECT.md)：项目定位与第三方状态；
 - [`CONTRIBUTING.md`](CONTRIBUTING.md)：公开贡献范围、构建与许可检查；
 - [`docs/USER_GUIDE.md`](docs/USER_GUIDE.md)：完整使用说明；
 - [`docs/MODULES_AND_STYLING.md`](docs/MODULES_AND_STYLING.md)：模块与样式职责；
 - [`docs/BIBLIOGRAPHY.md`](docs/BIBLIOGRAPHY.md)：GB/T 7714 + ATX-ACGN-REF；
-- [`hiro/README.md`](hiro/README.md)：各 `.sty` 模块说明；
+- [`hiro/README.md`](hiro/README.md)：HIRO 模块说明；
 - [`examples/README.md`](examples/README.md)：样张说明；
 - [`tests/README.md`](tests/README.md)：测试说明；
 - [`docs/assets/rendered/README.md`](docs/assets/rendered/README.md)：README 图像生成规则；
